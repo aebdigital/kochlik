@@ -1,0 +1,767 @@
+{
+  "balustrada": [
+    "Euro3plast"
+  ],
+  "barova-stolicka-armillaria": [
+    "Plust"
+  ],
+  "barova-stolicka-fade": [
+    "Plust"
+  ],
+  "barova-stolicka-frozen-okruhla": [
+    "Plust"
+  ],
+  "barova-stolicka-frozen-stvorcova": [
+    "Plust"
+  ],
+  "barovy-stol-armillaria": [
+    "Plust"
+  ],
+  "barovy-stol-fade-hpl": [
+    "Plust"
+  ],
+  "barovy-stol-fade": [
+    "Plust"
+  ],
+  "barovy-stol-fura-obdlznik": [
+    "Plust"
+  ],
+  "barovy-stol-fura": [
+    "Plust"
+  ],
+  "buba": [
+    "Plust"
+  ],
+  "busta-francuzska-zena": [
+    "Euro3plast"
+  ],
+  "cactus": [
+    "Plust"
+  ],
+  "diamond": [
+    "Plust"
+  ],
+  "drop": [
+    "Plust"
+  ],
+  "eclipse": [
+    "Vecagarden"
+  ],
+  "eggy": [
+    "Vecagarden"
+  ],
+  "etria-uno": [
+    "Euro3plast"
+  ],
+  "etria": [
+    "Euro3plast"
+  ],
+  "festonato": [
+    "Euro3plast"
+  ],
+  "fontana-musla-conchiglia": [
+    "Euro3plast"
+  ],
+  "fontana-neptun": [
+    "Euro3plast"
+  ],
+  "gula-atmosfera-so-svetlom": [
+    "Euro3plast"
+  ],
+  "hrantik-akan-2": [
+    "Euro3plast"
+  ],
+  "hrantik-akan": [
+    "Euro3plast"
+  ],
+  "hrantik-cassetta-fogliata": [
+    "Serralunga"
+  ],
+  "hrantik-hladky-balaustra-liscia": [
+    "Euro3plast"
+  ],
+  "hrantik-hladky-cassetta-liscia": [
+    "Serralunga"
+  ],
+  "hrantik-kube-s-kolieskami": [
+    "Euro3plast"
+  ],
+  "hrantik-kube": [
+    "Euro3plast"
+  ],
+  "hrantik-rettangolare-ruvida": [
+    "Serralunga"
+  ],
+  "hrantik-rettangolo-festonato": [
+    "Serralunga"
+  ],
+  "hrantik-siepi-hladky": [
+    "Euro3plast"
+  ],
+  "hrantik-siepi-s-dvojitou-stenou": [
+    "Euro3plast"
+  ],
+  "hrantik-toskansky-s-dvojitou-stenou": [
+    "Euro3plast"
+  ],
+  "hrantik-vysoky-kube-s-kolieskami": [
+    "Euro3plast"
+  ],
+  "hrantik-vysoky-kube": [
+    "Euro3plast"
+  ],
+  "ikon-pot": [
+    "Euro3plast"
+  ],
+  "jazvecik-otto": [
+    "Serralunga"
+  ],
+  "jetlag": [
+    "Plust"
+  ],
+  "kalich-calice-fogliato": [
+    "Serralunga"
+  ],
+  "konferencny-stolik-boom": [
+    "Plust"
+  ],
+  "konferencny-stolik-fade-hpl-2": [
+    "Plust"
+  ],
+  "konferencny-stolik-fade-hpl": [
+    "Plust"
+  ],
+  "konferencny-stolik-meteor": [
+    "Serralunga"
+  ],
+  "konferencny-stolik-milo": [
+    "Serralunga"
+  ],
+  "konferencny-stolik-oasis": [
+    "Serralunga"
+  ],
+  "konferencny-stolik-palenquera": [
+    "Serralunga"
+  ],
+  "konferencny-stolik-vela": [
+    "Plust"
+  ],
+  "kreslo-airball": [
+    "Plust"
+  ],
+  "kreslo-balzac": [
+    "Serralunga"
+  ],
+  "kreslo-barceloneta": [
+    "Serralunga"
+  ],
+  "kreslo-bay": [
+    "Serralunga"
+  ],
+  "kreslo-big-cut": [
+    "Plust"
+  ],
+  "kreslo-bold": [
+    "Plust"
+  ],
+  "kreslo-boom": [
+    "Plust"
+  ],
+  "kreslo-canisse": [
+    "Serralunga"
+  ],
+  "kreslo-fade": [
+    "Plust"
+  ],
+  "kreslo-gumball-junior": [
+    "Plust"
+  ],
+  "kreslo-gumball": [
+    "Plust"
+  ],
+  "kreslo-jetlag": [
+    "Plust"
+  ],
+  "kreslo-kubrick": [
+    "Serralunga"
+  ],
+  "kreslo-ohla": [
+    "Plust"
+  ],
+  "kreslo-pasha": [
+    "Euro3plast"
+  ],
+  "kreslo-pine-beach": [
+    "Serralunga"
+  ],
+  "kreslo-september": [
+    "Plust"
+  ],
+  "kreslo-time-out": [
+    "Serralunga"
+  ],
+  "kreslo-vela": [
+    "Plust"
+  ],
+  "kresloosirchester": [
+    "Serralunga"
+  ],
+  "kube-lavicka": [
+    "Euro3plast"
+  ],
+  "kube-mini-kvetinac-stvorcovy": [
+    "Euro3plast"
+  ],
+  "kube-stolicka": [
+    "Euro3plast"
+  ],
+  "kube-tower-vysoky": [
+    "Euro3plast"
+  ],
+  "kube-tower": [
+    "Euro3plast"
+  ],
+  "kuriatko": [
+    "Serralunga"
+  ],
+  "kvetina-ilie": [
+    "Euro3plast"
+  ],
+  "kvetinac-anjeli": [
+    "Euro3plast"
+  ],
+  "kvetinac-bordato-liscio-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-bordato-liscio": [
+    "Serralunga"
+  ],
+  "kvetinac-cassero-60": [
+    "Serralunga"
+  ],
+  "kvetinac-cassero-long": [
+    "Serralunga"
+  ],
+  "kvetinac-cassero-slim": [
+    "Serralunga"
+  ],
+  "kvetinac-cassero-small": [
+    "Serralunga"
+  ],
+  "kvetinac-cilinder": [
+    "Euro3plast"
+  ],
+  "kvetinac-cone-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-cone": [
+    "Serralunga"
+  ],
+  "kvetinac-cubotti-alto-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-cubotti-alto": [
+    "Serralunga"
+  ],
+  "kvetinac-cup-maly": [
+    "Serralunga"
+  ],
+  "kvetinac-cup-velky": [
+    "Serralunga"
+  ],
+  "kvetinac-cup-vysoky": [
+    "Serralunga"
+  ],
+  "kvetinac-doppio-bordo-e3p": [
+    "Euro3plast"
+  ],
+  "kvetinac-doppio-bordo": [
+    "Serralunga"
+  ],
+  "kvetinac-eufronio": [
+    "Serralunga"
+  ],
+  "kvetinac-fence-maly": [
+    "Serralunga"
+  ],
+  "kvetinac-fence": [
+    "Serralunga"
+  ],
+  "kvetinac-festonato-maxi": [
+    "Serralunga"
+  ],
+  "kvetinac-festonato": [
+    "Serralunga"
+  ],
+  "kvetinac-grand-jane": [
+    "Serralunga"
+  ],
+  "kvetinac-holly-all": [
+    "Serralunga"
+  ],
+  "kvetinac-ikon-mini": [
+    "Euro3plast"
+  ],
+  "kvetinac-ikon-xxl-zatvoreny-s-dierkami": [
+    "Euro3plast"
+  ],
+  "kvetinac-ikon-xxl": [
+    "Euro3plast"
+  ],
+  "kvetinac-ilie-gloss": [
+    "Euro3plast"
+  ],
+  "kvetinac-june": [
+    "Serralunga"
+  ],
+  "kvetinac-kabin-extra": [
+    "Serralunga"
+  ],
+  "kvetinac-kabin-high-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-kabin-high": [
+    "Serralunga"
+  ],
+  "kvetinac-kabin-long": [
+    "Serralunga"
+  ],
+  "kvetinac-kabin-maxi": [
+    "Serralunga"
+  ],
+  "kvetinac-kabin": [
+    "Serralunga"
+  ],
+  "kvetinac-kiam-gloss": [
+    "Euro3plast"
+  ],
+  "kvetinac-kiam": [
+    "Euro3plast"
+  ],
+  "kvetinac-kube-high-slim-2": [
+    "Euro3plast"
+  ],
+  "kvetinac-kube-high-slim": [
+    "Euro3plast"
+  ],
+  "kvetinac-kube-s-kolieskami": [
+    "Euro3plast"
+  ],
+  "kvetinac-kube": [
+    "Euro3plast"
+  ],
+  "kvetinac-kubis-stvorcovy": [
+    "Euro3plast"
+  ],
+  "kvetinac-limoni": [
+    "Serralunga"
+  ],
+  "kvetinac-liscio-siena-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-liscio-siena": [
+    "Serralunga"
+  ],
+  "kvetinac-lluna-nova": [
+    "Serralunga"
+  ],
+  "kvetinac-lluna-plena": [
+    "Serralunga"
+  ],
+  "kvetinac-marcantonio-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-marcantonio": [
+    "Serralunga"
+  ],
+  "kvetinac-memory-pot-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-memory-pot": [
+    "Serralunga"
+  ],
+  "kvetinac-millerighe-alto": [
+    "Serralunga"
+  ],
+  "kvetinac-millerighe-angolo-orizzontale": [
+    "Serralunga"
+  ],
+  "kvetinac-millerighe-angolo": [
+    "Serralunga"
+  ],
+  "kvetinac-millerighe-parete": [
+    "Serralunga"
+  ],
+  "kvetinac-millerighe-quadrato": [
+    "Serralunga"
+  ],
+  "kvetinac-ming-high": [
+    "Serralunga"
+  ],
+  "kvetinac-ming": [
+    "Serralunga"
+  ],
+  "kvetinac-missed-tree-i": [
+    "Serralunga"
+  ],
+  "kvetinac-missed-tree-ii": [
+    "Serralunga"
+  ],
+  "kvetinac-new-pot-maly": [
+    "Serralunga"
+  ],
+  "kvetinac-new-pot-stredny": [
+    "Serralunga"
+  ],
+  "kvetinac-new-pot-velky": [
+    "Serralunga"
+  ],
+  "kvetinac-new-pot-vysoky": [
+    "Serralunga"
+  ],
+  "kvetinac-orcio-festonato": [
+    "Serralunga"
+  ],
+  "kvetinac-ornamentovy": [
+    "Euro3plast"
+  ],
+  "kvetinac-pisa": [
+    "Serralunga"
+  ],
+  "kvetinac-primavera-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-primavera": [
+    "Serralunga"
+  ],
+  "kvetinac-quadro-fiore": [
+    "Serralunga"
+  ],
+  "kvetinac-rettangolare-millerighe": [
+    "Serralunga"
+  ],
+  "kvetinac-rettangolare-s-osvetlenim": [
+    "Serralunga"
+  ],
+  "kvetinac-rettangolare": [
+    "Serralunga"
+  ],
+  "kvetinac-santavase": [
+    "Serralunga"
+  ],
+  "kvetinac-scarlett": [
+    "Serralunga"
+  ],
+  "kvetinac-siepi-k-stene": [
+    "Euro3plast"
+  ],
+  "kvetinac-siepi-stvorcovy-s-dvojitou-stenou": [
+    "Euro3plast"
+  ],
+  "kvetinac-siepi-stvorcovy": [
+    "Euro3plast"
+  ],
+  "kvetinac-siepi": [
+    "Euro3plast"
+  ],
+  "kvetinac-tempium": [
+    "Euro3plast"
+  ],
+  "kvetinac-tisicriadkovy-stvorec": [
+    "Euro3plast"
+  ],
+  "kvetinac-torre-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-torre": [
+    "Serralunga"
+  ],
+  "kvetinac-toskansky-stvor-s-dvojitou-stenou-50-cm": [
+    "Euro3plast"
+  ],
+  "kvetinac-tubini-svietiaci": [
+    "Serralunga"
+  ],
+  "kvetinac-tubini": [
+    "Serralunga"
+  ],
+  "kvetinac-tulum": [
+    "Euro3plast"
+  ],
+  "kvetinac-uovo-di-colombo": [
+    "Serralunga"
+  ],
+  "kvetinac-uva-spina": [
+    "Serralunga"
+  ],
+  "kvetinac-vases": [
+    "Serralunga"
+  ],
+  "kvetinac-versailles": [
+    "Serralunga"
+  ],
+  "kvetinac-vysoky-kube-s-kolieskami": [
+    "Euro3plast"
+  ],
+  "kvetinac-vysoky-kube": [
+    "Euro3plast"
+  ],
+  "lavica-luba": [
+    "Serralunga"
+  ],
+  "lavica-polobluk": [
+    "Euro3plast"
+  ],
+  "lavicka-giuletta": [
+    "Serralunga"
+  ],
+  "lavicka-romeo": [
+    "Serralunga"
+  ],
+  "lavickatwist": [
+    "Plust"
+  ],
+  "lehatko-aqua": [
+    "Serralunga"
+  ],
+  "lehatko-gumball": [
+    "Plust"
+  ],
+  "lehatko-lazy-sdraio": [
+    "Serralunga"
+  ],
+  "lehatko-lettino-sunbed": [
+    "Serralunga"
+  ],
+  "madame": [
+    "Plust"
+  ],
+  "misa-ciotola-giulia": [
+    "Serralunga"
+  ],
+  "misa-ciotola-ruvida": [
+    "Serralunga"
+  ],
+  "moai": [
+    "Plust"
+  ],
+  "modul-big-cut": [
+    "Plust"
+  ],
+  "nadoba-etrusca": [
+    "Euro3plast"
+  ],
+  "nadoba-impero": [
+    "Euro3plast"
+  ],
+  "nadoba-ulivum": [
+    "Euro3plast"
+  ],
+  "new-wave": [
+    "Serralunga"
+  ],
+  "nicole": [
+    "Plust"
+  ],
+  "ninfea": [
+    "Plust"
+  ],
+  "odkladaci-stolik-aqua": [
+    "Serralunga"
+  ],
+  "odkladaci-stolik-dado": [
+    "Serralunga"
+  ],
+  "paloma-svietiaci": [
+    "Serralunga"
+  ],
+  "paloma": [
+    "Serralunga"
+  ],
+  "paravan-gradient": [
+    "Plust"
+  ],
+  "pouf-big-cut": [
+    "Plust"
+  ],
+  "pouf-lounge-cube": [
+    "Serralunga"
+  ],
+  "quadrum": [
+    "Euro3plast"
+  ],
+  "rebelot": [
+    "Plust"
+  ],
+  "ripple-table": [
+    "Serralunga"
+  ],
+  "rohove-kreslo-big-cut": [
+    "Plust"
+  ],
+  "russel-chair-cushion": [
+    "Serralunga"
+  ],
+  "saving": [
+    "Plust"
+  ],
+  "sedacka-airball": [
+    "Plust"
+  ],
+  "sedacka-balzac": [
+    "Serralunga"
+  ],
+  "sedacka-boom": [
+    "Plust"
+  ],
+  "sedacka-canisse": [
+    "Serralunga"
+  ],
+  "sedacka-gumball-junior": [
+    "Plust"
+  ],
+  "sedacka-gumball": [
+    "Plust"
+  ],
+  "sedacka-ohla": [
+    "Plust"
+  ],
+  "sedacka-pine-beach": [
+    "Serralunga"
+  ],
+  "sedacka-sirchester": [
+    "Serralunga"
+  ],
+  "sedadlo-boom": [
+    "Plust"
+  ],
+  "sedatko-cero": [
+    "Serralunga"
+  ],
+  "stohovatelna-stolicka-fade": [
+    "Plust"
+  ],
+  "stojaca-lampa-bonheur": [
+    "Serralunga"
+  ],
+  "stol-balzac": [
+    "Serralunga"
+  ],
+  "stol-chloe": [
+    "Plust"
+  ],
+  "stol-cubalibre": [
+    "Plust"
+  ],
+  "stol-fade-metal": [
+    "Plust"
+  ],
+  "stol-fade": [
+    "Plust"
+  ],
+  "stol-frozen": [
+    "Plust"
+  ],
+  "stol-plust-metal": [
+    "Plust"
+  ],
+  "stolicka-chloe": [
+    "Plust"
+  ],
+  "stolicka-croisette-s-operadlom": [
+    "Serralunga"
+  ],
+  "stolicka-croisette": [
+    "Serralunga"
+  ],
+  "stolicka-fade": [
+    "Plust"
+  ],
+  "stolicka-porcino": [
+    "Serralunga"
+  ],
+  "stolicka-regista": [
+    "Serralunga"
+  ],
+  "stolicka-russel": [
+    "Serralunga"
+  ],
+  "stolicka-solea-2-2": [
+    "Serralunga"
+  ],
+  "stolicka-solea-2": [
+    "Serralunga"
+  ],
+  "stolik-big-cut": [
+    "Plust"
+  ],
+  "stolik-bold": [
+    "Plust"
+  ],
+  "stolik-enta": [
+    "Plust"
+  ],
+  "stolik-juju": [
+    "Serralunga"
+  ],
+  "stolik-oasi": [
+    "Euro3plast"
+  ],
+  "stolik-t-ball-2": [
+    "Plust"
+  ],
+  "stolik-t-ball": [
+    "Plust"
+  ],
+  "stolova-lampa-fade-22-cm": [
+    "Plust"
+  ],
+  "stolova-lampa-fade-30-cm": [
+    "Plust"
+  ],
+  "stolova-lampa-fade-metal": [
+    "Plust"
+  ],
+  "svietiaci-paravan-fade": [
+    "Plust"
+  ],
+  "taburetka-fade": [
+    "Plust"
+  ],
+  "tambo": [
+    "Plust"
+  ],
+  "tumbler": [
+    "Teraitaly"
+  ],
+  "twist-box": [
+    "Plust"
+  ],
+  "twist": [
+    "Plust"
+  ],
+  "vaso-flow-large": [
+    "Serralunga"
+  ],
+  "vaso-flow-medium": [
+    "Serralunga"
+  ],
+  "vaso-kabin-maxi-con-luce": [
+    "Serralunga"
+  ],
+  "vaso-sevres": [
+    "Serralunga"
+  ],
+  "vesiak-godot": [
+    "Plust"
+  ],
+  "vesiak-lapsus": [
+    "Plust"
+  ],
+  "vesiak-ramo": [
+    "Serralunga"
+  ],
+  "visiaca-lampa-bonheur": [
+    "Serralunga"
+  ]
+}
