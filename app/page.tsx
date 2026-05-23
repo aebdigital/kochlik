@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
 import ProductCard from '@/components/ProductCard';
+import HomeHero from '@/components/HomeHero';
 import { getProductsByCategory } from '@/lib/data';
 
 const benefits = [
@@ -38,40 +39,7 @@ export default function HomePage() {
       <CategoryBar />
 
       <main className="flex-1 bg-white">
-        <section className="relative h-[64vh] min-h-[520px] overflow-hidden">
-          <Image
-            src="/legacy/pot1.jpg"
-            alt="Dizajnové kvetináče"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-transparent" />
-
-          <div className="site-container relative flex h-full items-center">
-            <div className="max-w-[650px] pb-10 text-white">
-              <h1 className="mb-8 text-[46px] font-extrabold uppercase leading-[1.08] tracking-normal md:text-[76px] lg:text-[86px]">
-                Dizajnové kvetináče
-              </h1>
-              <p className="mb-12 max-w-[620px] text-[24px] font-light leading-relaxed text-white/85 md:text-[28px]">
-                Vášmu domovu, záhrade alebo firme dodajú osobitný charakter a ich nezvyčajné tvary pôsobia výnimočne.
-              </p>
-              <Link
-                href="/product-category/dizajnove"
-                className="inline-flex h-14 items-center bg-[var(--color-brand)] px-10 text-[16px] font-light uppercase tracking-wide text-white transition-colors hover:bg-[var(--color-brand-dark)]"
-              >
-                Pozrieť
-              </Link>
-            </div>
-          </div>
-
-          <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-2">
-            <span className="h-4 w-4 rounded-full border-2 border-[var(--color-brand)]" />
-            <span className="h-2 w-2 rounded-full bg-white" />
-            <span className="h-2 w-2 rounded-full bg-white" />
-          </div>
-        </section>
+        <HomeHero />
 
         <section className="bg-[#f1eeee] py-20">
           <div className="site-container text-center">

@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
 import ProductCard from '@/components/ProductCard';
+import ProductGallery from '@/components/ProductGallery';
+import ContactDrawer from '@/components/ContactDrawer';
 import { getCatalog, getCategorySlugByName, getProductBySlug, getRelatedProducts } from '@/lib/data';
 
 export function generateStaticParams() {
@@ -25,7 +26,6 @@ export default async function ProductPage({
   }
 
   const galleryImages = product.images.length > 0 ? product.images : ['/legacy/pot1.jpg'];
-  const [mainImage] = galleryImages;
   const relatedProducts = getRelatedProducts(product, 4);
   const primaryCategorySlug = product.categories[0] ? getCategorySlugByName(product.categories[0]) : 'vsetky';
   const hasSupplierLine = product.description.toLowerCase().includes('pre viac inform');
@@ -53,55 +53,29 @@ export default async function ProductPage({
             </nav>
 
             <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
-              <div>
-                <div className="relative h-[560px] max-w-[680px] overflow-hidden bg-white lg:h-[830px]">
-                  <Image
-                    src={mainImage}
-                    alt={product.name}
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 45vw, 100vw"
-                    className="object-cover"
-                  />
-                  <button aria-label="Otvoriť obrázok" className="absolute right-4 top-4 text-[#999]">
-                    <span className="relative block h-5 w-5 before:absolute before:left-1/2 before:top-0 before:h-full before:w-px before:-translate-x-1/2 before:bg-[#999] after:absolute after:left-0 after:top-1/2 after:h-px after:w-full after:-translate-y-1/2 after:bg-[#999]" />
-                  </button>
-                </div>
-
-                {galleryImages.length > 1 && (
-                  <div className="mt-4 flex max-w-[680px] gap-3 overflow-x-auto no-scrollbar">
-                    {galleryImages.slice(0, 5).map((image, index) => (
-                      <button
-                        key={`${image}-${index}`}
-                        aria-label={`Obrázok produktu ${index + 1}`}
-                        className="relative h-28 w-28 shrink-0 overflow-hidden bg-white opacity-75 transition-opacity hover:opacity-100"
-                      >
-                        <Image src={image} alt="" fill sizes="112px" className="object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ProductGallery images={galleryImages} alt={product.name} />
 
               <div className="pt-1">
-                <h1 className="mb-9 text-[40px] font-extrabold leading-tight text-[var(--color-brown)] md:text-[48px]">
+                <h1 className="mb-6 text-[40px] font-extrabold leading-tight text-[var(--color-brown)] md:text-[48px]">
                   {product.name}
                 </h1>
 
-                <div className="max-w-[780px] border border-[#d9d9d9] bg-[#efefef]">
-                  <div className="flex h-14 items-center justify-center gap-8 text-[#333]">
-                    <button aria-label="Znížiť množstvo">
-                      <ChevronLeft className="h-4 w-4 fill-current" />
-                    </button>
-                    <span className="text-[16px] font-light">1</span>
-                    <button aria-label="Zvýšiť množstvo">
-                      <ChevronRight className="h-4 w-4 fill-current" />
-                    </button>
+                {product.description && (
+                  <div className="mb-8 max-w-[780px] whitespace-pre-line text-[17px] font-light leading-[1.75] text-[#666]">
+                    {product.description}
                   </div>
-                  <button className="h-16 w-full bg-[var(--color-brand)] text-[22px] font-light text-white transition-colors hover:bg-[var(--color-brand-dark)]">
-                    Pridať do košíka
-                  </button>
-                </div>
+                )}
+
+                {!hasSupplierLine && (
+                  <p className="mb-10 text-[15px] font-light text-[#777]">
+                    Pre viac informácií navštívte stránku dodávateľa{' '}
+                    <a href={product.url} className="text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">
+                      tu
+                    </a>
+                  </p>
+                )}
+
+                <ContactDrawer productName={product.name} productUrl={product.url} />
 
                 <div className="mt-8 flex items-center gap-5 text-[#aaa]">
                   <button aria-label="Pridať medzi obľúbené" className="hover:text-[var(--color-brand)]">
@@ -128,21 +102,6 @@ export default async function ProductPage({
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="site-container py-20">
-          <div className="max-w-[1320px] text-[22px] font-light leading-[1.9] text-[#777] whitespace-pre-line">
-            {product.description ||
-              'Elegantný produkt s výrazným tvarom, ktorý vynikne v interiéri aj exteriéri. Pre viac informácií nás kontaktujte telefonicky alebo e-mailom.'}
-          </div>
-          {!hasSupplierLine && (
-            <p className="mt-16 text-[20px] font-light text-[#777]">
-              Pre viac informácií navštívte stránku dodávateľa{' '}
-              <a href={product.url} className="text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">
-                tu
-              </a>
-            </p>
-          )}
         </section>
 
         {relatedProducts.length > 0 && (

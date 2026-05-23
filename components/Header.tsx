@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]">
-      <div className="hidden border-b border-[#eee] bg-[#ebe9e9] text-[13px] text-[#aaa] md:block">
+      <div className="hidden border-b border-[#eee] bg-[#ebe9e9] text-[13px] text-[#555] md:block">
         <div className="site-container flex h-9 items-center justify-between">
           <div className="flex items-center gap-4">
             <a href="tel:+421905587986" className="inline-flex items-center gap-1 hover:text-[var(--color-brand)]">

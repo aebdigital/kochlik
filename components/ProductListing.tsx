@@ -14,9 +14,23 @@ const sortOptions: Array<{ label: string; value: SortKey }> = [
 ];
 
 function priceValue(price: string): number {
-  const normalized = price.replace(/\s/g, '').replace(',', '.');
-  const match = normalized.match(/\d+(?:\.\d+)?/);
-  return match ? Number(match[0]) : Number.POSITIVE_INFINITY;
+  // Catalog format: "€1,234.56" or ranges like "€407.00 – €1,002.00".
+  // Comma is a thousands separator; period is the decimal. Use the low end of ranges.
+  const firstNumber = price.split(/[–-]/)[0] ?? '';
+  const normalized = firstNumber.replace(/[^\d.]/g, '');
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) && normalized.length > 0 ? parsed : NaN;
+}
+
+function comparePrice(a: Product, b: Product, direction: 'asc' | 'desc'): number {
+  const va = priceValue(a.price);
+  const vb = priceValue(b.price);
+  const aMissing = Number.isNaN(va);
+  const bMissing = Number.isNaN(vb);
+  if (aMissing && bMissing) return 0;
+  if (aMissing) return 1;
+  if (bMissing) return -1;
+  return direction === 'asc' ? va - vb : vb - va;
 }
 
 export default function ProductListing({ products }: { products: Product[] }) {
@@ -39,11 +53,11 @@ export default function ProductListing({ products }: { products: Product[] }) {
       : products.filter(product => product.brands.includes(brand) || product.brand === brand);
 
     if (sort === 'price-asc') {
-      return filtered.sort((a, b) => priceValue(a.price) - priceValue(b.price));
+      return filtered.sort((a, b) => comparePrice(a, b, 'asc'));
     }
 
     if (sort === 'price-desc') {
-      return filtered.sort((a, b) => priceValue(b.price) - priceValue(a.price));
+      return filtered.sort((a, b) => comparePrice(a, b, 'desc'));
     }
 
     if (sort === 'name-asc') {

@@ -41,13 +41,13 @@ export default function Footer() {
                 key={item.label}
                 href={item.href}
                 aria-label={item.label}
-                className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-[11px] shadow-[0_2px_6px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(0,0,0,0.2)]"
+                className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-[8px] shadow-[0_2px_5px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_3px_8px_rgba(0,0,0,0.2)]"
               >
                 <Image
                   src={item.icon}
                   alt=""
-                  width={44}
-                  height={44}
+                  width={32}
+                  height={32}
                   className="h-full w-full object-cover"
                 />
               </a>
