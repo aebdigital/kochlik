@@ -37,6 +37,40 @@ export default function ProductListing({ products }: { products: Product[] }) {
   const [sort, setSort] = useState<SortKey>('default');
   const [brand, setBrand] = useState('all');
 
+  // Compute the possible price range from products
+  const priceRange = useMemo(() => {
+    let min = Infinity;
+    let max = -Infinity;
+    for (const p of products) {
+      const v = priceValue(p.price);
+      if (!Number.isNaN(v)) {
+        if (v < min) min = v;
+        if (v > max) max = v;
+      }
+    }
+    return {
+      min: min === Infinity ? 0 : Math.floor(min),
+      max: max === -Infinity ? 1000 : Math.ceil(max),
+    };
+  }, [products]);
+
+  // Price range state
+  const [priceRangeVal, setPriceRangeVal] = useState<[number, number] | null>(null);
+
+  // Sync state if products list changes (e.g. user changes category)
+  const [prevProducts, setPrevProducts] = useState(products);
+  if (prevProducts !== products) {
+    setPrevProducts(products);
+    setPriceRangeVal(null);
+  }
+
+  const minVal = priceRangeVal ? priceRangeVal[0] : priceRange.min;
+  const maxVal = priceRangeVal ? priceRangeVal[1] : priceRange.max;
+
+  const rangeDiff = priceRange.max - priceRange.min;
+  const leftPercent = rangeDiff > 0 ? ((minVal - priceRange.min) / rangeDiff) * 100 : 0;
+  const rightPercent = rangeDiff > 0 ? 100 - ((maxVal - priceRange.min) / rangeDiff) * 100 : 0;
+
   const brands = useMemo(() => {
     return Array.from(
       new Set(
@@ -48,9 +82,16 @@ export default function ProductListing({ products }: { products: Product[] }) {
   }, [products]);
 
   const visibleProducts = useMemo(() => {
-    const filtered = brand === 'all'
+    let filtered = brand === 'all'
       ? [...products]
       : products.filter(product => product.brands.includes(brand) || product.brand === brand);
+
+    // Apply price filter
+    filtered = filtered.filter(product => {
+      const v = priceValue(product.price);
+      if (Number.isNaN(v)) return true; // keep "Cena na vyžiadanie" products
+      return v >= minVal && v <= maxVal;
+    });
 
     if (sort === 'price-asc') {
       return filtered.sort((a, b) => comparePrice(a, b, 'asc'));
@@ -65,7 +106,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
     }
 
     return filtered;
-  }, [brand, products, sort]);
+  }, [brand, products, sort, minVal, maxVal]);
 
   if (products.length === 0) {
     return (
@@ -80,6 +121,57 @@ export default function ProductListing({ products }: { products: Product[] }) {
   return (
     <div className="grid gap-12 lg:grid-cols-[260px_1fr]">
       <aside className="hidden pt-8 lg:block">
+        {/* Price Range Filter (Desktop) */}
+        {priceRange.max > priceRange.min && (
+          <div className="mb-12 border-b border-[#eee] pb-10">
+            <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Cena</h2>
+            
+            <div className="range-slider-container my-8">
+              <div 
+                className="range-slider-track"
+                style={{
+                  left: `${leftPercent}%`,
+                  right: `${rightPercent}%`
+                }}
+              />
+              <input 
+                type="range"
+                min={priceRange.min}
+                max={priceRange.max}
+                value={minVal}
+                onChange={e => {
+                  const val = Math.min(Number(e.target.value), maxVal - 1);
+                  setPriceRangeVal([val, maxVal]);
+                }}
+                className="range-slider-input"
+              />
+              <input 
+                type="range"
+                min={priceRange.min}
+                max={priceRange.max}
+                value={maxVal}
+                onChange={e => {
+                  const val = Math.max(Number(e.target.value), minVal + 1);
+                  setPriceRangeVal([minVal, val]);
+                }}
+                className="range-slider-input"
+              />
+            </div>
+
+            <div className="flex items-center justify-between gap-4 mt-6 text-[15px] font-light text-[#777]">
+              <div className="flex items-center gap-2">
+                <span>Od</span>
+                <span className="font-semibold text-[var(--color-brown)]">{minVal} €</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>Do</span>
+                <span className="font-semibold text-[var(--color-brown)]">{maxVal} €</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Brand Filter (Desktop) */}
         {brands.length > 0 && (
           <div>
             <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Značka</h2>
@@ -132,6 +224,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
         {/* Mobile controls */}
         <div className="mb-8 grid gap-4 border-b border-[#eee] pb-4 lg:hidden">
           <span className="text-[16px] font-light text-[#777]">{visibleProducts.length} produktov</span>
+          
           <select
             value={sort}
             className="h-12 w-full border border-[#e5e5e5] bg-white px-4 text-[16px] text-[#777] outline-none"
@@ -143,6 +236,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
               </option>
             ))}
           </select>
+          
           {brands.length > 0 && (
             <select
               value={brand}
@@ -157,6 +251,47 @@ export default function ProductListing({ products }: { products: Product[] }) {
               ))}
             </select>
           )}
+
+          {/* Price Range Filter (Mobile) */}
+          {priceRange.max > priceRange.min && (
+            <div className="mt-4 border-t border-[#eee] pt-4">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[15px] font-bold text-[var(--color-brown)]">Cena:</span>
+                <span className="text-[14px] font-semibold text-[var(--color-brand)]">{minVal} € – {maxVal} €</span>
+              </div>
+              <div className="range-slider-container my-4">
+                <div 
+                  className="range-slider-track"
+                  style={{
+                    left: `${leftPercent}%`,
+                    right: `${rightPercent}%`
+                  }}
+                />
+                <input 
+                  type="range"
+                  min={priceRange.min}
+                  max={priceRange.max}
+                  value={minVal}
+                  onChange={e => {
+                    const val = Math.min(Number(e.target.value), maxVal - 1);
+                    setPriceRangeVal([val, maxVal]);
+                  }}
+                  className="range-slider-input"
+                />
+                <input 
+                  type="range"
+                  min={priceRange.min}
+                  max={priceRange.max}
+                  value={maxVal}
+                  onChange={e => {
+                    const val = Math.max(Number(e.target.value), minVal + 1);
+                    setPriceRangeVal([minVal, val]);
+                  }}
+                  className="range-slider-input"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {visibleProducts.length > 0 ? (
@@ -168,7 +303,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
         ) : (
           <div className="py-20 text-center">
             <h2 className="text-[24px] font-light text-[#999]">
-              Pre zvolenú značku sa nenašli žiadne produkty.
+              Pre zvolené filtre sa nenašli žiadne produkty.
             </h2>
           </div>
         )}
