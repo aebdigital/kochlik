@@ -6,15 +6,30 @@ import { X, Phone, Mail, MapPin } from 'lucide-react';
 export default function ContactDrawer({
   productName,
   productUrl,
+  selectedDimension,
+  selectedColor,
 }: {
   productName: string;
   productUrl: string;
+  selectedDimension?: string;
+  selectedColor?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState(`Mám záujem o produkt: ${productName}`);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    let msg = `Mám záujem o produkt: ${productName}`;
+    if (selectedDimension) {
+      msg += `, rozmer: ${selectedDimension}`;
+    }
+    if (selectedColor) {
+      msg += `, farba: ${selectedColor}`;
+    }
+    setMessage(msg);
+  }, [productName, selectedDimension, selectedColor, open]);
 
   useEffect(() => {
     if (!open) return;
@@ -35,6 +50,8 @@ export default function ContactDrawer({
     const subject = `Dopyt: ${productName}`;
     const body = [
       `Produkt: ${productName}`,
+      selectedDimension ? `Rozmer: ${selectedDimension}` : '',
+      selectedColor ? `Farba: ${selectedColor}` : '',
       `Odkaz: ${productUrl}`,
       '',
       `Meno: ${name}`,
@@ -43,7 +60,7 @@ export default function ContactDrawer({
       '',
       'Správa:',
       message,
-    ].join('\n');
+    ].filter(val => val !== '').join('\n');
     window.location.href = `mailto:info@kochlik.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 

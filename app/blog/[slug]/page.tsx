@@ -1,0 +1,104 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import CategoryBar from '@/components/CategoryBar';
+import { getBlogPostBySlug, getBlogPosts, getRelatedBlogPosts } from '@/lib/blog';
+
+export function generateStaticParams() {
+  return getBlogPosts().map(post => ({ slug: post.slug }));
+}
+
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const related = getRelatedBlogPosts(post, 3);
+
+  return (
+    <>
+      <Header />
+      <CategoryBar />
+
+      <main className="flex-1 bg-white">
+        <article className="site-container max-w-[1100px] py-20">
+          <nav className="mb-10 text-[15px] font-light text-[#999]" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-[var(--color-brand)]">Domov</Link>
+            <span className="mx-2">/</span>
+            <Link href="/blog" className="hover:text-[var(--color-brand)]">Blog</Link>
+            <span className="mx-2">/</span>
+            <span>{post.title}</span>
+          </nav>
+
+          <div className="mb-6 flex items-center gap-5 text-[15px] font-light text-[#aaa]">
+            <span className="h-px w-10 bg-[#dedede]" />
+            <span>{post.dateLabel}</span>
+          </div>
+
+          <h1 className="mb-10 max-w-[900px] text-[36px] font-extrabold leading-[1.15] text-[var(--color-brown)] md:text-[48px]">
+            {post.title}
+          </h1>
+
+          {post.featuredImage && (
+            <div className="relative mb-14 h-[360px] w-full overflow-hidden bg-[#f4f4f4] md:h-[520px]">
+              <Image
+                src={post.featuredImage}
+                alt={post.title}
+                fill
+                priority
+                sizes="(min-width: 1100px) 1100px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          )}
+
+          <div
+            className="blog-content text-[19px] font-light leading-[1.85] text-[#555]"
+            dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+          />
+        </article>
+
+        {related.length > 0 && (
+          <section className="site-container max-w-[1320px] border-t border-[#eee] py-20">
+            <h2 className="mb-10 text-[28px] font-extrabold uppercase tracking-wide text-[var(--color-brown)]">
+              Mohlo by vás zaujímať
+            </h2>
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+              {related.map(other => {
+                const image = other.featuredImage || '/legacy/k1.jpg';
+                return (
+                  <Link key={other.slug} href={`/blog/${other.slug}`} className="group block">
+                    <div className="relative mb-5 h-[260px] w-full overflow-hidden bg-[#f4f4f4]">
+                      <Image
+                        src={image}
+                        alt={other.title}
+                        fill
+                        sizes="(min-width: 768px) 30vw, 85vw"
+                        className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div className="mb-2 text-[14px] font-light text-[#c9c9c9]">{other.dateLabel}</div>
+                    <h3 className="text-[20px] font-extrabold leading-tight text-[var(--color-brown)] transition-colors group-hover:text-[var(--color-brand)]">
+                      {other.title}
+                    </h3>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+      </main>
+
+      <Footer />
+    </>
+  );
+}

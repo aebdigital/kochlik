@@ -89,7 +89,7 @@ export default function HomeHero() {
                 <h1 className="mb-8 text-[46px] font-extrabold uppercase leading-[1.08] tracking-normal md:text-[76px] lg:text-[86px]">
                   {slide.title}
                 </h1>
-                <p className="mb-12 max-w-[620px] text-[24px] font-light leading-relaxed text-white/85 md:text-[28px]">
+                <p className="mb-12 max-w-[620px] text-[18px] font-light leading-relaxed text-white/85 md:text-[22px]">
                   {slide.text}
                 </p>
                 <Link

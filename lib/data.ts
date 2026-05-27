@@ -12,6 +12,17 @@ interface ScrapedProduct {
   categories?: string[];
   image_urls?: string[];
   local_images?: string[];
+  variations?: {
+    attributes: Record<string, string>;
+    price: string;
+    variation_id?: number;
+  }[];
+  colors?: {
+    name: string;
+    code?: string;
+    hex?: string;
+    image?: string;
+  }[];
 }
 
 export interface Product {
@@ -27,6 +38,18 @@ export interface Product {
   description: string;
   attributes: Record<string, string>;
   images: string[];
+  variations: {
+    attributes: Record<string, string>;
+    price: string;
+    variationId?: number;
+  }[];
+  colors: {
+    name: string;
+    code?: string;
+    hex?: string;
+    image?: string;
+  }[];
+  dimensions: string[];
 }
 
 export const categoryLinks = [
@@ -121,11 +144,74 @@ function getProductBrands(slug: string): string[] {
   return productBrandsCache[slug] || [];
 }
 
+function extractDimensionsFromText(description: string): string[] {
+  if (!description) return [];
+  
+  // 1. Look for Rozmer on the same line, e.g. "Rozmer: 39 x 38 x 74 cm"
+  const sameLineMatch = description.match(/rozmer[a-z]*\s*:\s*(\d+[^?\n\r]+)/i);
+  if (sameLineMatch) {
+    const val = sameLineMatch[1].replace(/\u00a0/g, ' ').trim();
+    if (val && !val.includes('Pre viac') && !val.includes('http') && val.length < 50) {
+      return [val];
+    }
+  }
+  
+  // 2. Look for Rozmer on a separate line
+  const lines = description.split('\n').map(l => l.trim()).filter(Boolean);
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^rozmer[a-z]*[:\s\-]*$/i.test(line)) {
+      if (i + 1 < lines.length) {
+        const nextLine = lines[i + 1];
+        if (/\d+/.test(nextLine) && nextLine.length < 50 && !nextLine.includes('http')) {
+          const cleaned = nextLine.replace(/\u00a0/g, ' ').trim();
+          return [cleaned];
+        }
+      }
+    }
+  }
+  
+  return [];
+}
+
+function cleanDescription(description: string): string {
+  if (!description) return '';
+  
+  const lines = description.split('\n');
+  const newLines: string[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (/^rozmer[a-z]*[:\s\-]*$/i.test(line)) {
+      if (i + 1 < lines.length && /\d+/.test(lines[i + 1])) {
+        i++; // skip next line (the dimensions line)
+        continue;
+      }
+    }
+    if (/^rozmer[a-z]*\s*:\s*\d+/i.test(line)) {
+      continue;
+    }
+    newLines.push(lines[i]);
+  }
+  
+  return newLines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 function normalizeProduct(product: ScrapedProduct): Product {
   const images = (product.local_images || [])
     .map(toPublicImagePath)
     .filter(Boolean);
   const brands = getProductBrands(product.slug);
+
+  const rawDescription = product.long_description || product.short_description || '';
+  const hasPriceVariations = product.variations && product.variations.length > 0;
+  
+  const variationDimensions = product.variations && product.variations.length > 0
+    ? Array.from(new Set(product.variations.map(v => v.attributes.rozmer || v.attributes.size).filter(Boolean)))
+    : [];
+
+  const dimensions = variationDimensions.length > 0
+    ? variationDimensions
+    : extractDimensionsFromText(rawDescription);
 
   return {
     id: product.slug,
@@ -136,10 +222,24 @@ function normalizeProduct(product: ScrapedProduct): Product {
     brand: brands[0] || 'KOCHLIK',
     brands,
     categories: product.categories || [],
-    shortDescription: product.short_description || '',
-    description: product.long_description || product.short_description || '',
+    shortDescription: cleanDescription(product.short_description || ''),
+    description: cleanDescription(rawDescription),
     attributes: product.attributes || {},
     images,
+    variations: (product.variations || []).map(v => ({
+      attributes: v.attributes || {},
+      price: v.price,
+      variationId: v.variation_id
+    })),
+    colors: (product.colors || [])
+      .map(c => ({
+        name: c.name,
+        code: c.code,
+        hex: c.hex,
+        image: c.image
+      }))
+      .filter(c => !/\d+\s*(x|×)\s*\d+/i.test(c.name)),
+    dimensions
   };
 }
 

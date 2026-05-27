@@ -80,22 +80,8 @@ export default function ProductListing({ products }: { products: Product[] }) {
   return (
     <div className="grid gap-12 lg:grid-cols-[260px_1fr]">
       <aside className="hidden pt-8 lg:block">
-        <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Zoradiť podľa</h2>
-        <ul className="space-y-4 text-[17px] font-light text-[#777]">
-          {sortOptions.map(option => (
-            <li key={option.value}>
-              <button
-                className={sort === option.value ? 'text-[var(--color-brand)]' : 'transition-colors hover:text-[var(--color-brand)]'}
-                onClick={() => setSort(option.value)}
-              >
-                {option.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-
         {brands.length > 0 && (
-          <div className="mt-12">
+          <div>
             <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Značka</h2>
             <ul className="space-y-4 text-[17px] font-light text-[#777]">
               <li>
@@ -122,6 +108,28 @@ export default function ProductListing({ products }: { products: Product[] }) {
       </aside>
 
       <div>
+        {/* Desktop sorting header */}
+        <div className="mb-8 hidden items-center justify-between border-b border-[#eee] pb-5 lg:flex">
+          <span className="text-[16px] font-light text-[#777]">
+            Nájdených {visibleProducts.length} produktov
+          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-[15px] font-light text-[#777]">Zoradiť podľa:</span>
+            <select
+              value={sort}
+              className="h-11 border border-[#d9d9d9] bg-white px-4 text-[15px] font-light text-[#333] outline-none transition-colors focus:border-[var(--color-brand)] cursor-pointer min-w-[200px]"
+              onChange={event => setSort(event.target.value as SortKey)}
+            >
+              {sortOptions.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Mobile controls */}
         <div className="mb-8 grid gap-4 border-b border-[#eee] pb-4 lg:hidden">
           <span className="text-[16px] font-light text-[#777]">{visibleProducts.length} produktov</span>
           <select

@@ -1,13 +1,51 @@
 import Link from 'next/link';
-import { Heart } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
 import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
-import ContactDrawer from '@/components/ContactDrawer';
+import ProductInfoPanel from '@/components/ProductInfoPanel';
 import { getCatalog, getCategorySlugByName, getProductBySlug, getRelatedProducts } from '@/lib/data';
+
+function renderDescription(text: string) {
+  if (!text) return null;
+  const parts = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    const [_, linkText, linkUrl] = match;
+    const matchIndex = match.index;
+
+    // Add preceding text
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+
+    // Add link
+    parts.push(
+      <a
+        key={matchIndex}
+        href={linkUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[var(--color-brand)] hover:underline font-normal"
+      >
+        {linkText}
+      </a>
+    );
+
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
 
 export function generateStaticParams() {
   return getCatalog().map(product => ({ slug: product.slug }));
@@ -62,7 +100,7 @@ export default async function ProductPage({
 
                 {product.description && (
                   <div className="mb-8 max-w-[780px] whitespace-pre-line text-[17px] font-light leading-[1.75] text-[#666]">
-                    {product.description}
+                    {renderDescription(product.description)}
                   </div>
                 )}
 
@@ -75,30 +113,7 @@ export default async function ProductPage({
                   </p>
                 )}
 
-                <ContactDrawer productName={product.name} productUrl={product.url} />
-
-                <div className="mt-8 flex items-center gap-5 text-[#aaa]">
-                  <button aria-label="Pridať medzi obľúbené" className="hover:text-[var(--color-brand)]">
-                    <Heart className="h-6 w-6 fill-current" />
-                  </button>
-                  <span className="h-7 w-px bg-[#d6d6d6]" />
-                  <a href="https://www.facebook.com/kochlikba" aria-label="Facebook" className="hover:text-[var(--color-brand)]">
-                    <span className="text-[24px] font-extrabold leading-none">f</span>
-                  </a>
-                  <a href="https://www.linkedin.com/in/anita-kochlik-924b4b6a/" aria-label="LinkedIn" className="hover:text-[var(--color-brand)]">
-                    <span className="text-[20px] font-extrabold leading-none">in</span>
-                  </a>
-                </div>
-
-                {product.categories.length > 0 && (
-                  <div className="mt-14 flex flex-wrap gap-3 text-[15px] font-light text-[#777]">
-                    {product.categories.map(category => (
-                      <span key={category} className="border border-[#d4d4d4] px-4 py-2">
-                        {category}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <ProductInfoPanel product={product} />
               </div>
             </div>
           </div>
