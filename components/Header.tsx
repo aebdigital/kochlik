@@ -34,7 +34,7 @@ export default function Header() {
           <div className="flex items-center gap-5">
             <span className="inline-flex items-center gap-1">
               <MapPin className="h-3.5 w-3.5" />
-              Ulica 29. augusta 28 Bratislava 841 01
+              Ulica 29. augusta 28, 811 09 Bratislava
             </span>
             <a href="https://www.facebook.com/kochlikba" aria-label="Facebook" className="hover:text-[var(--color-brand)]">
               <span className="text-[14px] font-extrabold leading-none">f</span>

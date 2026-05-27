@@ -22,7 +22,7 @@ export default function Footer() {
           <h3 className="mb-6 text-[22px] font-extrabold text-white">Kontakt</h3>
           <div className="space-y-3 text-[16px] font-light leading-relaxed">
             <p>Ulica 29. augusta 28</p>
-            <p>Bratislava 841 09</p>
+            <p>811 09 Bratislava</p>
             <p>
               <a href="tel:+421905587986" className="hover:text-[var(--color-brand)] transition-colors">+421 905 587 986</a>
             </p>

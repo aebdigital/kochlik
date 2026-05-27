@@ -6,6 +6,14 @@ import CategoryBar from '@/components/CategoryBar';
 import ProductCard from '@/components/ProductCard';
 import HomeHero from '@/components/HomeHero';
 import { getProductsByCategory } from '@/lib/data';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Dizajnové kvetináče Bratislava',
+  description:
+    'KOCHLIK v Bratislave ponúka dizajnové, moderné, klasické a svietiace talianske kvetináče, doplnky a exteriérový nábytok pre domy, firmy aj architektov.',
+  path: '/',
+});
 
 const benefits = [
   {

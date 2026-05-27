@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import { createFaqJsonLd, createMetadata } from '@/lib/seo';
 
 const questions = [
   {
@@ -25,11 +26,24 @@ const questions = [
   },
 ];
 
+export const metadata = createMetadata({
+  title: 'Časté otázky o objednávkach a doprave',
+  description:
+    'Odpovede na časté otázky o dodaní, doprave, balení a objednávaní dizajnových kvetináčov KOCHLIK v Bratislave aj mimo Bratislavy.',
+  path: '/faq',
+});
+
 export default function FaqPage() {
+  const faqJsonLd = createFaqJsonLd(questions);
+
   return (
     <>
       <Header />
       <CategoryBar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
 
       <main className="flex-1 bg-white">
         <section className="site-container py-24">

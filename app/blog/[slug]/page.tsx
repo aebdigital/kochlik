@@ -5,9 +5,31 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
 import { getBlogPostBySlug, getBlogPosts, getRelatedBlogPosts } from '@/lib/blog';
+import { createBlogPostingJsonLd, createBreadcrumbJsonLd, createMetadata, truncateDescription } from '@/lib/seo';
 
 export function generateStaticParams() {
   return getBlogPosts().map(post => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  return createMetadata({
+    title: post.title,
+    description: truncateDescription(post.excerpt || post.contentText),
+    path: `/blog/${post.slug}`,
+    image: post.featuredImage,
+    type: 'article',
+  });
 }
 
 export default async function BlogPostPage({
@@ -23,11 +45,25 @@ export default async function BlogPostPage({
   }
 
   const related = getRelatedBlogPosts(post, 3);
+  const postJsonLd = createBlogPostingJsonLd(post);
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: 'Domov', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
 
   return (
     <>
       <Header />
       <CategoryBar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(postJsonLd) }}
+      />
 
       <main className="flex-1 bg-white">
         <article className="site-container max-w-[1100px] py-20">

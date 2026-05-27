@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Product } from '@/lib/data';
 import ContactDrawer from './ContactDrawer';
 
@@ -92,9 +93,11 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
                     }`}
                   >
                     {color.image ? (
-                      <img 
+                      <Image 
                         src={color.image} 
                         alt={color.name} 
+                        width={64}
+                        height={64}
                         className={`h-full w-full rounded-full object-cover transition-transform ${
                           color.image.includes('whitec2') ? 'scale-[1.4]' : ''
                         }`} 

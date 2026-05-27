@@ -3,6 +3,17 @@
 import { useEffect, useState } from 'react';
 import { X, Phone, Mail, MapPin } from 'lucide-react';
 
+function getDefaultMessage(productName: string, selectedDimension?: string, selectedColor?: string) {
+  let message = `Mám záujem o produkt: ${productName}`;
+  if (selectedDimension) {
+    message += `, rozmer: ${selectedDimension}`;
+  }
+  if (selectedColor) {
+    message += `, farba: ${selectedColor}`;
+  }
+  return message;
+}
+
 export default function ContactDrawer({
   productName,
   productUrl,
@@ -18,18 +29,8 @@ export default function ContactDrawer({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    let msg = `Mám záujem o produkt: ${productName}`;
-    if (selectedDimension) {
-      msg += `, rozmer: ${selectedDimension}`;
-    }
-    if (selectedColor) {
-      msg += `, farba: ${selectedColor}`;
-    }
-    setMessage(msg);
-  }, [productName, selectedDimension, selectedColor, open]);
+  const defaultMessage = getDefaultMessage(productName, selectedDimension, selectedColor);
+  const [message, setMessage] = useState(defaultMessage);
 
   useEffect(() => {
     if (!open) return;
@@ -71,7 +72,10 @@ export default function ContactDrawer({
     <>
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setMessage(defaultMessage);
+          setOpen(true);
+        }}
         className="inline-flex h-14 items-center bg-[var(--color-brand)] px-12 text-[16px] font-light uppercase tracking-wide text-white transition-colors hover:bg-[var(--color-brand-dark)]"
       >
         Mám záujem
@@ -135,7 +139,7 @@ export default function ContactDrawer({
               <span>
                 Ulica 29. augusta 28
                 <br />
-                Bratislava 841 09
+                811 09 Bratislava
               </span>
             </div>
           </div>

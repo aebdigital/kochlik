@@ -3,6 +3,15 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
 import referenceImages from '@/data/reference_images.json';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Referencie dizajnových kvetináčov',
+  description:
+    'Fotografie realizácií a referencií s dizajnovými kvetináčmi KOCHLIK pre terasy, interiéry, hotely, reštaurácie a verejné priestory.',
+  path: '/referencie',
+  image: referenceImages[0] || '/legacy/kochlik-predajna.jpg',
+});
 
 export default function ReferencesPage() {
   return (

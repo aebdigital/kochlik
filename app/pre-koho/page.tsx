@@ -2,6 +2,15 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Kvetináče pre architektov a zákazníkov v Bratislave',
+  description:
+    'KOCHLIK pomáha architektom, developerom aj koncovým zákazníkom vybrať dizajnové kvetináče, farby a rozmery pre interiér, terasu a exteriér.',
+  path: '/pre-koho',
+  image: '/legacy/onas-1420x410-1.jpg',
+});
 
 export default function PreKohoPage() {
   return (

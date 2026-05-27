@@ -50,6 +50,8 @@ export interface Product {
     image?: string;
   }[];
   dimensions: string[];
+  colorFamilies: string[];
+  dimensionGroups: string[];
 }
 
 export const categoryLinks = [
@@ -115,6 +117,14 @@ export function getCategoryDescription(categorySlug: string): string {
 
 export function getCategorySlugByName(categoryName: string): string {
   return categoryLinks.find(item => item.category === categoryName)?.slug || 'vsetky';
+}
+
+export function getCanonicalCategorySlug(categorySlug: string): string {
+  if (categorySlug === 'vsetky') {
+    return 'vsetky';
+  }
+
+  return getCategorySlugByName(resolveCategoryName(categorySlug));
 }
 
 function toPublicImagePath(localPath: string): string {
@@ -196,6 +206,75 @@ function cleanDescription(description: string): string {
   return newLines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 }
 
+// Color family mapping: keyword patterns → family label
+const COLOR_FAMILY_MAP: [string, RegExp][] = [
+  ['Biela',    /\b(bianc[oa]|white|neve|gesso|ivory|neutral|lacca.*bianc|lacquer.*white|lacquer.*bianc)\b/i],
+  ['Čierna',   /\b(nero|black|pearl.?black)\b/i],
+  ['Hnedá',    /\b(brown|corten|rust|castoro|cappuccino|tortora|taupe|impruneta)\b/i],
+  ['Červená',  /\b(rosso|\bred\b|red.?clay|pompeian|terracotta|terra.*sien[ae]?|terr.*sien[ae]?|coral(?!.*sand))\b/i],
+  ['Zelená',   /\b(verd[ei]|green|sage|oliv[ea]|origano|salv(?:ia|i|a)|emerald|mint|menta|rosemary|british)\b/i],
+  ['Modrá',    /\b(blue|azzurr|acqua|aqua|aquamarina|provenza|night.?blue|maddalena)\b/i],
+  ['Žltá',     /\b(yellow|giallo|sahara|ochre|gold(?:en)?)\b/i],
+  ['Oranžová', /\b(orange|arancio)\b/i],
+  ['Ružová',   /\b(pink|fuchsia|more.?di.?rovo|coral.?sand)\b/i],
+  ['Sivá',     /\b(grey|gray|granite|cement|stone|pietr[a-z]*|lava|anthracit(?:e)?|antracit(?:e)?|ground|old.?stone)\b/i],
+  ['Béžová',   /\b(beige|cret[ai]|sandy|grain|sand[^a]|decor|tide)\b/i],
+];
+
+function getColorFamilies(colors: { name: string }[]): string[] {
+  const families = new Set<string>();
+  for (const color of colors) {
+    const name = color.name;
+    for (const [family, pattern] of COLOR_FAMILY_MAP) {
+      if (pattern.test(name)) {
+        families.add(family);
+      }
+    }
+  }
+  return Array.from(families).sort((a, b) => a.localeCompare(b, 'sk'));
+}
+
+const DIMENSION_GROUPS = [
+  { label: 'Do 50 cm', min: 0, max: 50 },
+  { label: '51-100 cm', min: 50, max: 100 },
+  { label: '101-150 cm', min: 100, max: 150 },
+  { label: 'Nad 150 cm', min: 150, max: Infinity },
+];
+
+function getDimensionValues(dimension: string): number[] {
+  const matches = dimension
+    .replace(/\u00a0/g, ' ')
+    .replace(/,/g, '.')
+    .match(/\d+(?:\.\d+)?/g);
+
+  return (matches || [])
+    .map(value => Number(value))
+    .filter(value => Number.isFinite(value));
+}
+
+function getDimensionGroups(dimensions: string[]): string[] {
+  const groups = new Set<string>();
+
+  for (const dimension of dimensions) {
+    const values = getDimensionValues(dimension);
+    if (values.length === 0) {
+      continue;
+    }
+
+    // Use the largest side so long or tall products land in the larger range.
+    const largestSide = Math.max(...values);
+    for (const group of DIMENSION_GROUPS) {
+      if (largestSide > group.min && largestSide <= group.max) {
+        groups.add(group.label);
+      }
+    }
+  }
+
+  return DIMENSION_GROUPS
+    .map(group => group.label)
+    .filter(label => groups.has(label));
+}
+
 function normalizeProduct(product: ScrapedProduct): Product {
   const images = (product.local_images || [])
     .map(toPublicImagePath)
@@ -203,8 +282,6 @@ function normalizeProduct(product: ScrapedProduct): Product {
   const brands = getProductBrands(product.slug);
 
   const rawDescription = product.long_description || product.short_description || '';
-  const hasPriceVariations = product.variations && product.variations.length > 0;
-  
   const variationDimensions = product.variations && product.variations.length > 0
     ? Array.from(new Set(product.variations.map(v => v.attributes.rozmer || v.attributes.size).filter(Boolean)))
     : [];
@@ -212,6 +289,15 @@ function normalizeProduct(product: ScrapedProduct): Product {
   const dimensions = variationDimensions.length > 0
     ? variationDimensions
     : extractDimensionsFromText(rawDescription);
+
+  const colors = (product.colors || [])
+    .map(c => ({
+      name: c.name,
+      code: c.code,
+      hex: c.hex,
+      image: c.image
+    }))
+    .filter(c => !/\d+\s*(x|×)\s*\d+/i.test(c.name));
 
   return {
     id: product.slug,
@@ -231,15 +317,10 @@ function normalizeProduct(product: ScrapedProduct): Product {
       price: v.price,
       variationId: v.variation_id
     })),
-    colors: (product.colors || [])
-      .map(c => ({
-        name: c.name,
-        code: c.code,
-        hex: c.hex,
-        image: c.image
-      }))
-      .filter(c => !/\d+\s*(x|×)\s*\d+/i.test(c.name)),
-    dimensions
+    colors,
+    dimensions,
+    colorFamilies: getColorFamilies(colors),
+    dimensionGroups: getDimensionGroups(dimensions)
   };
 }
 

@@ -1,6 +1,14 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Obchodné podmienky a reklamačný poriadok',
+  description:
+    'Všeobecné obchodné podmienky, objednávanie, platby a reklamačný poriadok pre zákazníkov KOCHLIK s.r.o.',
+  path: '/obchodne-podmienky',
+});
 
 export default function TermsPage() {
   return (

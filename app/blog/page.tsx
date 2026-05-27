@@ -4,6 +4,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
 import { getBlogPosts } from '@/lib/blog';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Blog o dizajnových kvetináčoch',
+  description:
+    'Inšpirácie, novinky a praktické články o dizajnových kvetináčoch, terasách, záhradách a exteriérových riešeniach od KOCHLIK Bratislava.',
+  path: '/blog',
+});
 
 export default function BlogPage() {
   const posts = getBlogPosts();

@@ -1,6 +1,14 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Ochrana osobných údajov',
+  description:
+    'Informácie o spracovaní a ochrane osobných údajov spoločnosti KOCHLIK s.r.o. v Bratislave.',
+  path: '/ochrana-osobnych-udajov',
+});
 
 export default function PrivacyPage() {
   return (

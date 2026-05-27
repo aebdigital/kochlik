@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
 import ProductInfoPanel from '@/components/ProductInfoPanel';
 import { getCatalog, getCategorySlugByName, getProductBySlug, getRelatedProducts } from '@/lib/data';
+import { createBreadcrumbJsonLd, createMetadata, createProductJsonLd, truncateDescription } from '@/lib/seo';
 
 function renderDescription(text: string) {
   if (!text) return null;
@@ -16,7 +17,7 @@ function renderDescription(text: string) {
   let match;
 
   while ((match = regex.exec(text)) !== null) {
-    const [_, linkText, linkUrl] = match;
+    const [, linkText, linkUrl] = match;
     const matchIndex = match.index;
 
     // Add preceding text
@@ -51,6 +52,30 @@ export function generateStaticParams() {
   return getCatalog().map(product => ({ slug: product.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  const categoryLabel = product.categories[0] || 'Dizajnové produkty';
+
+  return createMetadata({
+    title: `${product.name} v Bratislave`,
+    description: truncateDescription(
+      `${product.name} od KOCHLIK Bratislava. ${product.description || product.shortDescription || categoryLabel}`
+    ),
+    path: `/produkt/${product.slug}`,
+    image: product.images[0],
+  });
+}
+
 export default async function ProductPage({
   params,
 }: {
@@ -67,11 +92,27 @@ export default async function ProductPage({
   const relatedProducts = getRelatedProducts(product, 4);
   const primaryCategorySlug = product.categories[0] ? getCategorySlugByName(product.categories[0]) : 'vsetky';
   const hasSupplierLine = product.description.toLowerCase().includes('pre viac inform');
+  const productJsonLd = createProductJsonLd(product);
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: 'Domov', path: '/' },
+    ...(product.categories[0]
+      ? [{ name: product.categories[0], path: `/product-category/${primaryCategorySlug}` }]
+      : []),
+    { name: product.name, path: `/produkt/${product.slug}` },
+  ]);
 
   return (
     <>
       <Header />
       <CategoryBar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
 
       <main className="flex-1 bg-white">
         <section className="bg-[#efefef] pb-20 pt-12">

@@ -13,6 +13,23 @@ const sortOptions: Array<{ label: string; value: SortKey }> = [
   { label: 'Názov A-Z', value: 'name-asc' },
 ];
 
+const dimensionGroupOptions = ['Do 50 cm', '51-100 cm', '101-150 cm', 'Nad 150 cm'];
+
+// Color family config: label -> display color for the circle swatch
+const colorFamilySwatches: Record<string, string> = {
+  'Biela': '#ffffff',
+  'Čierna': '#222222',
+  'Hnedá': '#8B5E3C',
+  'Červená': '#D32F2F',
+  'Zelená': '#4CAF50',
+  'Modrá': '#1976D2',
+  'Žltá': '#FBC02D',
+  'Oranžová': '#F57C00',
+  'Ružová': '#E91E8C',
+  'Sivá': '#9E9E9E',
+  'Béžová': '#D4C5A9',
+};
+
 function priceValue(price: string): number {
   // Catalog format: "€1,234.56" or ranges like "€407.00 – €1,002.00".
   // Comma is a thousands separator; period is the decimal. Use the low end of ranges.
@@ -36,6 +53,8 @@ function comparePrice(a: Product, b: Product, direction: 'asc' | 'desc'): number
 export default function ProductListing({ products }: { products: Product[] }) {
   const [sort, setSort] = useState<SortKey>('default');
   const [brand, setBrand] = useState('all');
+  const [colorFamily, setColorFamily] = useState('all');
+  const [dimensionGroup, setDimensionGroup] = useState('all');
 
   // Compute the possible price range from products
   const priceRange = useMemo(() => {
@@ -81,10 +100,37 @@ export default function ProductListing({ products }: { products: Product[] }) {
     ).sort((a, b) => a.localeCompare(b, 'sk'));
   }, [products]);
 
+  const availableColorFamilies = useMemo(() => {
+    const families = new Set<string>();
+    for (const p of products) {
+      for (const f of p.colorFamilies) families.add(f);
+    }
+    // Return in the order defined in colorFamilySwatches
+    return Object.keys(colorFamilySwatches).filter(f => families.has(f));
+  }, [products]);
+
+  const availableDimensionGroups = useMemo(() => {
+    const groups = new Set<string>();
+    for (const p of products) {
+      for (const group of p.dimensionGroups) groups.add(group);
+    }
+    return dimensionGroupOptions.filter(group => groups.has(group));
+  }, [products]);
+
   const visibleProducts = useMemo(() => {
     let filtered = brand === 'all'
       ? [...products]
       : products.filter(product => product.brands.includes(brand) || product.brand === brand);
+
+    // Apply color family filter
+    if (colorFamily !== 'all') {
+      filtered = filtered.filter(product => product.colorFamilies.includes(colorFamily));
+    }
+
+    // Apply dimension group filter
+    if (dimensionGroup !== 'all') {
+      filtered = filtered.filter(product => product.dimensionGroups.includes(dimensionGroup));
+    }
 
     // Apply price filter
     filtered = filtered.filter(product => {
@@ -106,7 +152,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
     }
 
     return filtered;
-  }, [brand, products, sort, minVal, maxVal]);
+  }, [brand, colorFamily, dimensionGroup, products, sort, minVal, maxVal]);
 
   if (products.length === 0) {
     return (
@@ -167,6 +213,75 @@ export default function ProductListing({ products }: { products: Product[] }) {
                 <span>Do</span>
                 <span className="font-semibold text-[var(--color-brown)]">{maxVal} €</span>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Color Family Filter (Desktop) */}
+        {availableColorFamilies.length > 0 && (
+          <div className="mb-12 border-b border-[#eee] pb-10">
+            <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Farba</h2>
+            <div className="flex flex-wrap gap-3">
+              <button
+                className={`h-9 px-4 border text-[14px] font-light transition-all rounded-full cursor-pointer ${
+                  colorFamily === 'all'
+                    ? 'border-[var(--color-brand)] bg-[var(--color-brand)]/10 text-[var(--color-brand)] font-normal'
+                    : 'border-[#d9d9d9] text-[#777] hover:border-[#999]'
+                }`}
+                onClick={() => setColorFamily('all')}
+              >
+                Všetky
+              </button>
+              {availableColorFamilies.map(family => (
+                <button
+                  key={family}
+                  title={family}
+                  onClick={() => setColorFamily(family)}
+                  className={`flex items-center gap-2 h-9 px-3 border text-[13px] font-light transition-all rounded-full cursor-pointer ${
+                    colorFamily === family
+                      ? 'border-[var(--color-brand)] bg-[var(--color-brand)]/10 font-normal'
+                      : 'border-[#d9d9d9] text-[#777] hover:border-[#999]'
+                  }`}
+                >
+                  <span
+                    className="h-5 w-5 rounded-full border border-black/15 shrink-0"
+                    style={{ backgroundColor: colorFamilySwatches[family] }}
+                  />
+                  {family}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Dimension Filter (Desktop) */}
+        {availableDimensionGroups.length > 0 && (
+          <div className="mb-12 border-b border-[#eee] pb-10">
+            <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Rozmer</h2>
+            <div className="flex flex-wrap gap-3">
+              <button
+                className={`h-9 px-4 border text-[14px] font-light transition-all rounded-full cursor-pointer ${
+                  dimensionGroup === 'all'
+                    ? 'border-[var(--color-brand)] bg-[var(--color-brand)]/10 text-[var(--color-brand)] font-normal'
+                    : 'border-[#d9d9d9] text-[#777] hover:border-[#999]'
+                }`}
+                onClick={() => setDimensionGroup('all')}
+              >
+                Všetky
+              </button>
+              {availableDimensionGroups.map(group => (
+                <button
+                  key={group}
+                  onClick={() => setDimensionGroup(group)}
+                  className={`h-9 px-4 border text-[14px] font-light transition-all rounded-full cursor-pointer ${
+                    dimensionGroup === group
+                      ? 'border-[var(--color-brand)] bg-[var(--color-brand)]/10 text-[var(--color-brand)] font-normal'
+                      : 'border-[#d9d9d9] text-[#777] hover:border-[#999]'
+                  }`}
+                >
+                  {group}
+                </button>
+              ))}
             </div>
           </div>
         )}
@@ -247,6 +362,38 @@ export default function ProductListing({ products }: { products: Product[] }) {
               {brands.map(item => (
                 <option key={item} value={item}>
                   {item}
+                </option>
+              ))}
+            </select>
+          )}
+
+          {/* Color Family Filter (Mobile) */}
+          {availableColorFamilies.length > 0 && (
+            <select
+              value={colorFamily}
+              className="h-12 w-full border border-[#e5e5e5] bg-white px-4 text-[16px] text-[#777] outline-none"
+              onChange={event => setColorFamily(event.target.value)}
+            >
+              <option value="all">Všetky farby</option>
+              {availableColorFamilies.map(family => (
+                <option key={family} value={family}>
+                  {family}
+                </option>
+              ))}
+            </select>
+          )}
+
+          {/* Dimension Filter (Mobile) */}
+          {availableDimensionGroups.length > 0 && (
+            <select
+              value={dimensionGroup}
+              className="h-12 w-full border border-[#e5e5e5] bg-white px-4 text-[16px] text-[#777] outline-none"
+              onChange={event => setDimensionGroup(event.target.value)}
+            >
+              <option value="all">Všetky rozmery</option>
+              {availableDimensionGroups.map(group => (
+                <option key={group} value={group}>
+                  {group}
                 </option>
               ))}
             </select>

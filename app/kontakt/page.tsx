@@ -2,12 +2,30 @@ import { BriefcaseBusiness, MessagesSquare } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import { createBreadcrumbJsonLd, createMetadata, siteConfig } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'Kontakt a predajňa v Bratislave',
+  description:
+    'Kontaktujte KOCHLIK v Bratislave. Navštívte predajňu na Ulici 29. augusta 28 alebo sa informujte o dizajnových kvetináčoch a nábytku telefonicky či e-mailom.',
+  path: '/kontakt',
+  image: '/legacy/kochlik-predajna.jpg',
+});
 
 export default function ContactPage() {
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: 'Domov', path: '/' },
+    { name: 'Kontakt', path: '/kontakt' },
+  ]);
+
   return (
     <>
       <Header />
       <CategoryBar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
       <main className="flex-1 bg-white">
         <section className="site-container py-24">
@@ -24,7 +42,7 @@ export default function ContactPage() {
                   <p>
                     <a href="tel:+421905587986" className="hover:text-[var(--color-brand)]">+421 905 587 986</a>
                     <br />
-                    <a href="mailto:kochlik@kochlik.sk" className="text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">kochlik@kochlik.sk</a>
+                    <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">{siteConfig.email}</a>
                   </p>
                   <p>
                     ul. 29. augusta 28

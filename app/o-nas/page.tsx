@@ -2,6 +2,15 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import { createMetadata } from '@/lib/seo';
+
+export const metadata = createMetadata({
+  title: 'O nás - dizajnové kvetináče Bratislava',
+  description:
+    'Spoznajte KOCHLIK, bratislavskú predajňu odolných talianskych dizajnových kvetináčov, nábytku a doplnkov z PE živice pre interiér aj exteriér.',
+  path: '/o-nas',
+  image: '/legacy/prekoho-1420x410-1.jpg',
+});
 
 const processSteps = [
   ['1. Polyetylénový prášok', 'Rotačné tvarovanie je špeciálna technika na výrobu plastových predmetov, pri ktorej sa využíva hlavne lineárny polyetylénový prášok.'],
