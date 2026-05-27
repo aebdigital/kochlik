@@ -1,0 +1,564 @@
+{
+  "etria-uno": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/etria_uno_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/etria_uno_pot_info_en.pdf"
+    }
+  ],
+  "ikon-pot": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_pot_info_en.pdf"
+    }
+  ],
+  "hrantik-siepi-hladky": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_cassetta.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_plant_box_info_en.pdf"
+    }
+  ],
+  "hrantik-siepi-s-dvojitou-stenou": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_cassetta_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_plant_box_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-ikon-mini": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_aromatika_vaso.pdf"
+    }
+  ],
+  "balustrada": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/balaustra_balaustra.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/balaustra_balustrade_info_en.pdf"
+    }
+  ],
+  "hrantik-kube-s-kolieskami": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_cassetta_con_doppia_parete_+_ruote.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_plant_box_with_double_wall_+_castors_info_en.pdf"
+    }
+  ],
+  "kvetinac-ikon-xxl": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_vaso_xxl.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_pot_xxl_info_en.pdf"
+    }
+  ],
+  "kvetinac-cilinder": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/cilindro_rot_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/cilindro_rot_pot_info_en.pdf"
+    }
+  ],
+  "festonato": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/festonato_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/festonato_pot_info_en.pdf"
+    }
+  ],
+  "kvetinac-siepi-k-stene": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_vaso_a_muro.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_wall_pot_info_en.pdf"
+    }
+  ],
+  "kube-lavicka": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_panca.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_bench_info_en.pdf"
+    }
+  ],
+  "kvetina-ilie": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ilie_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ilie_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "stolik-oasi": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/oasi_poltroncina_&_tavolino.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/oasi_small_armchair_&_small_table_info_en.pdf"
+    }
+  ],
+  "fontana-musla-conchiglia": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/conchiglia_fontana.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/conchiglia_fountain_info_en.pdf"
+    }
+  ],
+  "hrantik-toskansky-s-dvojitou-stenou": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/toscana_cassetta_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/toscana_plant_box_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-ikon-xxl-zatvoreny-s-dierkami": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_vaso_xxl.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ikon_pot_xxl_info_en.pdf"
+    }
+  ],
+  "kube-tower-vysoky": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_tower_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_tower_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-anjeli": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/angeli_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/angeli_pot_info_en.pdf"
+    }
+  ],
+  "hrantik-vysoky-kube-s-kolieskami": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_cassetta_con_doppia_parete_+_ruote.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_plant_box_with_double_wall_+_castors_info_en.pdf"
+    }
+  ],
+  "kvetinac-kube-high-slim": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_slim_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_slim_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-kiam": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kiam_vaso_quadro_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kiam_square_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-kiam-gloss": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kiam_vaso_gloss_quadro_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kiam_gloss_square_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "nadoba-etrusca": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/etrusca_fioriera.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/etrusca_vase_info_en.pdf"
+    }
+  ],
+  "kvetinac-doppio-bordo-e3p": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/doppio_bordo_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/doppio_bordo_pot_info_en.pdf"
+    }
+  ],
+  "kvetinac-ornamentovy": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ornato_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ornato_pot_info_en.pdf"
+    }
+  ],
+  "kube-stolicka": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_sgabello.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_stool_info_en.pdf"
+    }
+  ],
+  "kvetinac-kube-s-kolieskami": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_vaso_con_doppia_parete_+_ruote.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_pot_with_double_wall_+_castors_info_en.pdf"
+    }
+  ],
+  "hrantik-vysoky-kube": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_vaso_con_doppia_parete_+_ruote.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_pot_with_double_wall_+_castors_info_en.pdf"
+    }
+  ],
+  "kube-mini-kvetinac-stvorcovy": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_aromatika_vaso_con_doppia_parete.pdf"
+    }
+  ],
+  "kube-tower": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_tower_cassetta_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_tower_plant_box_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-tisicriadkovy-stvorec": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/millerighe_vaso_quadro.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/millerighe_square_pot_info_en.pdf"
+    }
+  ],
+  "kvetinac-siepi-stvorcovy-s-dvojitou-stenou": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_vaso_quadro_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_square_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-vysoky-kube-s-kolieskami": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_vaso_con_doppia_parete_+_ruote.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_pot_with_double_wall_+_castors_info_en.pdf"
+    }
+  ],
+  "gula-atmosfera-so-svetlom": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/sfera_lampada.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/sfera_light_info_en.pdf"
+    }
+  ],
+  "kvetinac-siepi": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_pot_info_en.pdf"
+    }
+  ],
+  "quadrum": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/quadrum_vaso_quadro_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/quadrum_square_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-tempium": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/tempium_vaso.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/tempium_pot_info_en.pdf"
+    }
+  ],
+  "kvetinac-kube": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "lavica-polobluk": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/semitonda_panca.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/semitonda_bench_info_en.pdf"
+    }
+  ],
+  "nadoba-ulivum": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ulivum_conca.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ulivum_conch_info_en.pdf"
+    }
+  ],
+  "etria": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/etria_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/etria_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "hrantik-hladky-balaustra-liscia": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/balaustra_liscia_cassetta.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/balaustra_liscia_plant_box_info_en.pdf"
+    }
+  ],
+  "hrantik-akan": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/akan_vaso_quadro_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/akan_square_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "hrantik-akan-2": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/akan_cassetta_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/akan_plant_box_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-tulum": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/tulum_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/tulum_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-ilie-gloss": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/ilie_vaso_gloss_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/ilie_gloss_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-kubis-stvorcovy": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kubis_vaso_quadro.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kubis_square_pot_info_en.pdf"
+    }
+  ],
+  "busta-francuzska-zena": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/donna_francese_busto.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/donna_francese_bust_info_en.pdf"
+    }
+  ],
+  "kvetinac-vysoky-kube": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_vaso_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kreslo-pasha": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/pash%C3%A0_poltroncina_&_tavolino.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/pash%C3%A0_small_armchair_&_small_table_info_en.pdf"
+    }
+  ],
+  "kvetinac-toskansky-stvor-s-dvojitou-stenou-50-cm": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/toscana_vaso_quadro_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/toscana_square_pot_with_double_wall_info_en.pdf"
+    }
+  ],
+  "nadoba-impero": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/impero_fioriera.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/impero_vase_info_en.pdf"
+    }
+  ],
+  "hrantik-kube": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_cassetta_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_plant_box_with_double_wall_info_en.pdf"
+    }
+  ],
+  "fontana-neptun": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/nettuno_fontana.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/nettuno_fountain_info_en.pdf"
+    }
+  ],
+  "kvetinac-kube-high-slim-2": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_slim_cassetta_con_doppia_parete.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/kube_high_slim_plant_box_with_double_wall_info_en.pdf"
+    }
+  ],
+  "kvetinac-siepi-stvorcovy": [
+    {
+      "label": "Technický dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_vaso_quadro.pdf"
+    },
+    {
+      "label": "Informačný dokument",
+      "url": "https://www.euro3plast.com/sheets/siepi_square_pot_info_en.pdf"
+    }
+  ]
+}

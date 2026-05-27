@@ -15,8 +15,9 @@ const staticPages = [
   { path: '/obchodne-podmienky', priority: 0.2 },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const catalog = await getCatalog();
   const categorySlugs = ['vsetky', ...categoryLinks.map(category => category.slug)];
   const staticEntries = staticPages.map(page => ({
     url: absoluteUrl(page.path),
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: slug === 'vsetky' ? 0.9 : 0.8,
   }));
 
-  const productEntries = getCatalog().map(product => ({
+  const productEntries = catalog.map(product => ({
     url: absoluteUrl(`/produkt/${product.slug}`),
     lastModified: now,
     changeFrequency: 'weekly' as const,

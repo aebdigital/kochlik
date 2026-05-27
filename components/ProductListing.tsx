@@ -50,7 +50,15 @@ function comparePrice(a: Product, b: Product, direction: 'asc' | 'desc'): number
   return direction === 'asc' ? va - vb : vb - va;
 }
 
-export default function ProductListing({ products }: { products: Product[] }) {
+export default function ProductListing({
+  products,
+  heading,
+  description,
+}: {
+  products: Product[];
+  heading?: string;
+  description?: string;
+}) {
   const [sort, setSort] = useState<SortKey>('default');
   const [brand, setBrand] = useState('all');
   const [colorFamily, setColorFamily] = useState('all');
@@ -169,7 +177,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
       <aside className="hidden pt-8 lg:block">
         {/* Price Range Filter (Desktop) */}
         {priceRange.max > priceRange.min && (
-          <div className="mb-12 border-b border-[#eee] pb-10">
+          <div className="mb-8">
             <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Cena</h2>
             
             <div className="range-slider-container my-8">
@@ -219,7 +227,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
 
         {/* Color Family Filter (Desktop) */}
         {availableColorFamilies.length > 0 && (
-          <div className="mb-12 border-b border-[#eee] pb-10">
+          <div className="mb-8">
             <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Farba</h2>
             <div className="flex flex-wrap gap-3">
               <button
@@ -256,7 +264,7 @@ export default function ProductListing({ products }: { products: Product[] }) {
 
         {/* Dimension Filter (Desktop) */}
         {availableDimensionGroups.length > 0 && (
-          <div className="mb-12 border-b border-[#eee] pb-10">
+          <div className="mb-8">
             <h2 className="mb-6 text-[24px] font-extrabold text-[var(--color-brown)]">Rozmer</h2>
             <div className="flex flex-wrap gap-3">
               <button
@@ -315,6 +323,21 @@ export default function ProductListing({ products }: { products: Product[] }) {
       </aside>
 
       <div>
+        {(heading || description) && (
+          <div className="mb-8 max-w-[920px]">
+            {heading && (
+              <h1 className="mb-4 text-[34px] font-extrabold leading-tight text-[#333] md:text-[42px]">
+                {heading}
+              </h1>
+            )}
+            {description && (
+              <p className="text-[18px] font-light leading-relaxed text-[#999] md:text-[20px]">
+                {description}
+              </p>
+            )}
+          </div>
+        )}
+
         {/* Desktop sorting header */}
         <div className="mb-8 hidden items-center justify-between border-b border-[#eee] pb-5 lg:flex">
           <span className="text-[16px] font-light text-[#777]">

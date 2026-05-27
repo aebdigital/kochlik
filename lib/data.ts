@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { getCmsCatalog } from './cms-data';
 
 interface ScrapedProduct {
   title: string;
@@ -52,6 +53,10 @@ export interface Product {
   dimensions: string[];
   colorFamilies: string[];
   dimensionGroups: string[];
+  downloadFiles: {
+    label: string;
+    url: string;
+  }[];
 }
 
 export const categoryLinks = [
@@ -275,6 +280,31 @@ function getDimensionGroups(dimensions: string[]): string[] {
     .filter(label => groups.has(label));
 }
 
+let productDownloadsCache: Record<string, { label: string; url: string }[]> | null = null;
+
+function getProductDownloads(slug: string): { label: string; url: string }[] {
+  if (!productDownloadsCache) {
+    try {
+      const filePath = path.join(process.cwd(), 'data', 'e3p_downloads_supabase.json');
+      const fileContents = fs.readFileSync(filePath, 'utf8');
+      const rawData = JSON.parse(fileContents);
+      productDownloadsCache = {};
+      for (const [key, files] of Object.entries(rawData)) {
+        if (Array.isArray(files)) {
+          productDownloadsCache[key] = files.map((f: { label?: string; url?: string }) => ({
+            label: f.label || 'Technický dokument',
+            url: f.url || '',
+          })).filter(f => f.url);
+        }
+      }
+    } catch {
+      productDownloadsCache = {};
+    }
+  }
+
+  return productDownloadsCache[slug] || [];
+}
+
 function normalizeProduct(product: ScrapedProduct): Product {
   const images = (product.local_images || [])
     .map(toPublicImagePath)
@@ -282,6 +312,17 @@ function normalizeProduct(product: ScrapedProduct): Product {
   const brands = getProductBrands(product.slug);
 
   const rawDescription = product.long_description || product.short_description || '';
+  let description = cleanDescription(rawDescription);
+  let shortDescription = cleanDescription(product.short_description || '');
+
+  const supplierIndex = description.toLowerCase().indexOf('pre viac inform');
+  if (supplierIndex !== -1) {
+    const textBefore = description.substring(0, supplierIndex).trim();
+    const textAfter = description.substring(supplierIndex).trim();
+    description = textBefore;
+    shortDescription = textAfter;
+  }
+
   const variationDimensions = product.variations && product.variations.length > 0
     ? Array.from(new Set(product.variations.map(v => v.attributes.rozmer || v.attributes.size).filter(Boolean)))
     : [];
@@ -308,8 +349,8 @@ function normalizeProduct(product: ScrapedProduct): Product {
     brand: brands[0] || 'KOCHLIK',
     brands,
     categories: product.categories || [],
-    shortDescription: cleanDescription(product.short_description || ''),
-    description: cleanDescription(rawDescription),
+    shortDescription,
+    description,
     attributes: product.attributes || {},
     images,
     variations: (product.variations || []).map(v => ({
@@ -320,11 +361,13 @@ function normalizeProduct(product: ScrapedProduct): Product {
     colors,
     dimensions,
     colorFamilies: getColorFamilies(colors),
-    dimensionGroups: getDimensionGroups(dimensions)
+    dimensionGroups: getDimensionGroups(dimensions),
+    downloadFiles: getProductDownloads(product.slug)
   };
 }
 
-export function getCatalog(): Product[] {
+
+function getStaticCatalog(): Product[] {
   try {
     const filePath = path.join(process.cwd(), 'data', 'master_catalog.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -338,13 +381,34 @@ export function getCatalog(): Product[] {
   }
 }
 
-export function getProductBySlug(slug: string): Product | undefined {
-  const catalog = getCatalog();
+export async function getCatalog(): Promise<Product[]> {
+  const staticCatalog = getStaticCatalog();
+  const cmsCatalog = await getCmsCatalog();
+  if (!cmsCatalog) {
+    return staticCatalog;
+  }
+
+  const productsBySlug = new Map(staticCatalog.map(product => [product.slug, product]));
+  for (const product of cmsCatalog) {
+    const staticProduct = productsBySlug.get(product.slug);
+    productsBySlug.set(product.slug, {
+      ...staticProduct,
+      ...product,
+      images: product.images.length > 0 ? product.images : staticProduct?.images || [],
+      downloadFiles: product.downloadFiles,
+    });
+  }
+
+  return Array.from(productsBySlug.values()).sort((a, b) => a.name.localeCompare(b.name, 'sk'));
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const catalog = await getCatalog();
   return catalog.find(product => product.slug === slug);
 }
 
-export function getProductsByCategory(categorySlug: string): Product[] {
-  const catalog = getCatalog();
+export async function getProductsByCategory(categorySlug: string): Promise<Product[]> {
+  const catalog = await getCatalog();
   if (categorySlug === 'vsetky') {
     return catalog;
   }
@@ -357,9 +421,10 @@ export function getProductsByCategory(categorySlug: string): Product[] {
   });
 }
 
-export function getRelatedProducts(product: Product, limit = 4): Product[] {
+export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
   const primaryCategory = product.categories[0];
-  return getCatalog()
+  const catalog = await getCatalog();
+  return catalog
     .filter(item => item.slug !== product.slug)
     .filter(item => !primaryCategory || item.categories.includes(primaryCategory))
     .slice(0, limit);

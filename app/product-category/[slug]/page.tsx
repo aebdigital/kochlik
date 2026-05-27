@@ -43,7 +43,7 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const products = getProductsByCategory(slug);
+  const products = await getProductsByCategory(slug);
   const title = resolveCategoryName(slug);
   const description = getCategoryDescription(slug);
   const canonicalSlug = getCanonicalCategorySlug(slug);
@@ -68,17 +68,8 @@ export default async function CategoryPage({
       />
 
       <main className="flex-1 bg-white">
-        <section className="site-container pb-12 pt-24 text-center">
-          <h1 className="mb-6 text-[34px] font-extrabold leading-tight text-[#333] md:text-[42px]">
-            {title}
-          </h1>
-          <p className="mx-auto max-w-[1420px] text-[20px] font-light leading-relaxed text-[#999] md:text-[24px]">
-            {description}
-          </p>
-        </section>
-
-        <section className="site-container pb-28">
-          <ProductListing products={products} />
+        <section className="site-container pb-28 pt-16">
+          <ProductListing products={products} heading={title} description={description} />
         </section>
       </main>
 

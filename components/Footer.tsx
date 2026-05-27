@@ -94,8 +94,19 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="site-container mt-14 border-t border-white/10 pt-6 text-[14px] font-light text-white/50">
+      <div className="site-container mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-[14px] font-light text-white/50 md:flex-row md:items-center md:justify-between">
         <p>© 2026 KOCHLIK s.r.o.</p>
+        <p>
+          Tvorba webu —{' '}
+          <a
+            href="https://aebdigital.sk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-[var(--color-brand)]"
+          >
+            AEB Digital
+          </a>
+        </p>
       </div>
     </footer>
   );

@@ -38,8 +38,8 @@ const benefits = [
   },
 ];
 
-export default function HomePage() {
-  const featuredProducts = getProductsByCategory('dizajnove').slice(0, 4);
+export default async function HomePage() {
+  const featuredProducts = (await getProductsByCategory('dizajnove')).slice(0, 4);
 
   return (
     <>

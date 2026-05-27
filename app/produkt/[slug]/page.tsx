@@ -48,8 +48,8 @@ function renderDescription(text: string) {
   return parts.length > 0 ? parts : text;
 }
 
-export function generateStaticParams() {
-  return getCatalog().map(product => ({ slug: product.slug }));
+export async function generateStaticParams() {
+  return (await getCatalog()).map(product => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({
@@ -58,7 +58,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -82,16 +82,16 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
   const galleryImages = product.images.length > 0 ? product.images : ['/legacy/pot1.jpg'];
-  const relatedProducts = getRelatedProducts(product, 4);
+  const relatedProducts = await getRelatedProducts(product, 4);
   const primaryCategorySlug = product.categories[0] ? getCategorySlugByName(product.categories[0]) : 'vsetky';
-  const hasSupplierLine = product.description.toLowerCase().includes('pre viac inform');
+  const downloadFiles = product.downloadFiles || [];
   const productJsonLd = createProductJsonLd(product);
   const breadcrumbJsonLd = createBreadcrumbJsonLd([
     { name: 'Domov', path: '/' },
@@ -145,20 +145,60 @@ export default async function ProductPage({
                   </div>
                 )}
 
-                {!hasSupplierLine && (
-                  <p className="mb-10 text-[15px] font-light text-[#777]">
-                    Pre viac informácií navštívte stránku dodávateľa{' '}
-                    <a href={product.url} className="text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">
-                      tu
-                    </a>
-                  </p>
-                )}
-
                 <ProductInfoPanel product={product} />
               </div>
             </div>
           </div>
         </section>
+
+        {/* Product Description & Downloads Section */}
+        {(product.shortDescription || downloadFiles.length > 0) && (
+          <section className="border-t border-[#e5e5e5] bg-white py-20">
+            <div className="site-container">
+              <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr]">
+                {product.shortDescription && (
+                  <div>
+                    <h2 className="mb-8 text-[22px] font-extrabold uppercase tracking-wider text-[var(--color-brown)]">
+                      Popis produktu
+                    </h2>
+                    <div className="whitespace-pre-line text-[16px] font-light leading-[1.8] text-[#555]">
+                      {renderDescription(product.shortDescription)}
+                    </div>
+                  </div>
+                )}
+
+                {downloadFiles.length > 0 && (
+                  <div>
+                    <h2 className="mb-8 text-[22px] font-extrabold uppercase tracking-wider text-[var(--color-brown)]">
+                      Dokumenty na stiahnutie
+                    </h2>
+                    <div className="grid gap-4">
+                      {downloadFiles.map(file => (
+                        <a
+                          key={file.url}
+                          href={file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex min-h-16 items-center justify-between border border-[#d9d9d9] bg-white px-5 py-4 text-[15px] font-semibold text-[#444] transition-all hover:border-[var(--color-brand)] hover:text-[var(--color-brand)] rounded-2xl shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:shadow-md"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600 font-extrabold text-[12px]">
+                              PDF
+                            </span>
+                            <span className="font-light text-[#555]">{file.label || 'Technický dokument'}</span>
+                          </div>
+                          <span className="text-[13px] font-extrabold uppercase tracking-wide text-gray-400 hover:text-[var(--color-brand)]">
+                            Stiahnuť
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
         {relatedProducts.length > 0 && (
           <section className="site-container border-t border-[#e5e5e5] py-20">
