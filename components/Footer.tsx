@@ -8,11 +8,6 @@ const socialLinks = [
     icon: '/legacy/social/facebook.svg',
   },
   {
-    href: 'https://www.linkedin.com/in/anita-kochlik-924b4b6a/',
-    label: 'LinkedIn',
-    icon: '/legacy/social/linkedin.svg',
-  },
-  {
     href: '#',
     label: 'Instagram',
     icon: '/legacy/social/instagram.png',

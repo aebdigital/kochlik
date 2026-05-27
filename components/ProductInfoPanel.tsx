@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Product } from '@/lib/data';
 import ContactDrawer from './ContactDrawer';
-import { Heart } from 'lucide-react';
+
 
 interface ProductInfoPanelProps {
   product: Product;
@@ -138,29 +138,6 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
           selectedColor={selectedColor}
         />
       </div>
-
-      <div className="flex items-center gap-5 text-[#aaa]">
-        <button aria-label="Pridať medzi obľúbené" className="hover:text-[var(--color-brand)] cursor-pointer">
-          <Heart className="h-6 w-6 fill-current" />
-        </button>
-        <span className="h-7 w-px bg-[#d6d6d6]" />
-        <a href="https://www.facebook.com/kochlikba" aria-label="Facebook" className="hover:text-[var(--color-brand)]">
-          <span className="text-[24px] font-extrabold leading-none">f</span>
-        </a>
-        <a href="https://www.linkedin.com/in/anita-kochlik-924b4b6a/" aria-label="LinkedIn" className="hover:text-[var(--color-brand)]">
-          <span className="text-[20px] font-extrabold leading-none">in</span>
-        </a>
-      </div>
-
-      {product.categories.length > 0 && (
-        <div className="mt-14 flex flex-wrap gap-3 text-[15px] font-light text-[#777]">
-          {product.categories.map(category => (
-            <span key={category} className="border border-[#d4d4d4] px-4 py-2">
-              {category}
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart } from 'lucide-react';
+
 import type { Product } from '@/lib/data';
 
 type ProductCardProduct = Pick<Product, 'slug' | 'name' | 'price' | 'images'>;
@@ -37,12 +37,11 @@ export default function ProductCard({ product }: { product: ProductCardProduct }
         )}
       </div>
 
-      <div className="grid grid-cols-[1fr_auto] gap-3 pt-4">
+      <div className="pt-4">
         <h3 className="text-[18px] font-extrabold leading-tight text-[#8a8a8a] transition-colors group-hover:text-[var(--color-brand-dark)]">
           {product.name}
         </h3>
-        <Heart className="mt-0.5 h-5 w-5 text-[#9a9a9a]" strokeWidth={1.8} />
-        <p className="col-span-2 text-[16px] font-light text-[#777]">
+        <p className="mt-1 text-[16px] font-light text-[#777]">
           {product.price}
         </p>
       </div>

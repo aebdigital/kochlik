@@ -39,9 +39,6 @@ export default function Header() {
             <a href="https://www.facebook.com/kochlikba" aria-label="Facebook" className="hover:text-[var(--color-brand)]">
               <span className="text-[14px] font-extrabold leading-none">f</span>
             </a>
-            <a href="https://www.linkedin.com/in/anita-kochlik-924b4b6a/" aria-label="LinkedIn" className="hover:text-[var(--color-brand)]">
-              <span className="text-[12px] font-extrabold leading-none">in</span>
-            </a>
           </div>
         </div>
       </div>
