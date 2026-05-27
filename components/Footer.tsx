@@ -21,18 +21,18 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-auto bg-[#eceaea] py-16 text-[#777]">
-      <div className="site-container grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <h3 className="mb-6 text-[22px] font-extrabold text-[var(--color-brown)]">Kontakt</h3>
+    <footer className="mt-auto bg-[var(--color-brown)] py-16 text-white/80">
+      <div className="site-container grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 w-full">
+        <div className="w-full max-w-[260px] min-w-0">
+          <h3 className="mb-6 text-[22px] font-extrabold text-white">Kontakt</h3>
           <div className="space-y-3 text-[16px] font-light leading-relaxed">
             <p>Ulica 29. augusta 28</p>
             <p>Bratislava 841 09</p>
             <p>
-              <a href="tel:+421905587986" className="hover:text-[var(--color-brand)]">+421 905 587 986</a>
+              <a href="tel:+421905587986" className="hover:text-[var(--color-brand)] transition-colors">+421 905 587 986</a>
             </p>
             <p>
-              <a href="mailto:info@kochlik.eu" className="hover:text-[var(--color-brand)]">info@kochlik.eu</a>
+              <a href="mailto:info@kochlik.eu" className="hover:text-[var(--color-brand)] transition-colors">info@kochlik.eu</a>
             </p>
           </div>
           <div className="flex items-center gap-4 pt-6">
@@ -41,7 +41,7 @@ export default function Footer() {
                 key={item.label}
                 href={item.href}
                 aria-label={item.label}
-                className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-[8px] shadow-[0_2px_5px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_3px_8px_rgba(0,0,0,0.2)]"
+                className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-[8px] bg-white/10 transition duration-200 hover:-translate-y-0.5 hover:bg-white/20"
               >
                 <Image
                   src={item.icon}
@@ -54,17 +54,17 @@ export default function Footer() {
             ))}
           </div>
         </div>
-
-        <div>
-          <h3 className="mb-6 text-[22px] font-extrabold text-[var(--color-brown)]">Otváracie hodiny</h3>
+ 
+        <div className="w-full max-w-[260px] min-w-0">
+          <h3 className="mb-6 text-[22px] font-extrabold text-white">Otváracie hodiny</h3>
           <div className="space-y-3 text-[16px] font-light leading-relaxed">
             <p>Na objednávku nakoľko pracujeme aj v teréne</p>
             <p>Stretnutie v predajni si prosím dohodnite telefonicky.</p>
           </div>
         </div>
-
-        <div>
-          <h3 className="mb-6 text-[22px] font-extrabold text-[var(--color-brown)]">Kategórie</h3>
+ 
+        <div className="w-full max-w-[260px] min-w-0">
+          <h3 className="mb-6 text-[22px] font-extrabold text-white">Kategórie</h3>
           <ul className="space-y-3 text-[16px] font-light">
             {[
               ['Nábytok', '/product-category/nabytok'],
@@ -75,23 +75,23 @@ export default function Footer() {
               ['Doplnky', '/product-category/doplnky'],
             ].map(([label, href]) => (
               <li key={label}>
-                <Link href={href} className="hover:text-[var(--color-brand)]">
+                <Link href={href} className="hover:text-[var(--color-brand)] transition-colors">
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-
-        <div>
-          <h3 className="mb-6 text-[22px] font-extrabold text-[var(--color-brown)]">Právne</h3>
+ 
+        <div className="w-full max-w-[260px] min-w-0">
+          <h3 className="mb-6 text-[22px] font-extrabold text-white">Právne</h3>
           <ul className="space-y-3 text-[16px] font-light">
             {[
               ['Ochrana osobných údajov', '/ochrana-osobnych-udajov'],
               ['Všeobecné obchodné podmienky', '/obchodne-podmienky'],
             ].map(([label, href]) => (
               <li key={label}>
-                <Link href={href} className="hover:text-[var(--color-brand)]">
+                <Link href={href} className="hover:text-[var(--color-brand)] transition-colors">
                   {label}
                 </Link>
               </li>
@@ -99,7 +99,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="site-container mt-14 border-t border-[#d8d6d6] pt-6 text-[14px] font-light text-[#777]">
+      <div className="site-container mt-14 border-t border-white/10 pt-6 text-[14px] font-light text-white/50">
         <p>© 2026 KOCHLIK s.r.o.</p>
       </div>
     </footer>
