@@ -33,7 +33,7 @@ export async function generateMetadata({
   return createMetadata({
     title: `${title} v Bratislave`,
     description,
-    path: `/product-category/${canonicalSlug}`,
+    path: `/produkt-kategoria/${canonicalSlug}`,
   });
 }
 
@@ -47,7 +47,7 @@ export default async function CategoryPage({
   const title = resolveCategoryName(slug);
   const description = getCategoryDescription(slug);
   const canonicalSlug = getCanonicalCategorySlug(slug);
-  const categoryPath = `/product-category/${canonicalSlug}`;
+  const categoryPath = `/produkt-kategoria/${canonicalSlug}`;
   const categoryJsonLd = createProductItemListJsonLd(products, categoryPath);
   const breadcrumbJsonLd = createBreadcrumbJsonLd([
     { name: 'Domov', path: '/' },

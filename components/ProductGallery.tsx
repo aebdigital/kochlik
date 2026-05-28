@@ -49,7 +49,7 @@ export default function ProductGallery({
           type="button"
           onClick={() => setLightboxOpen(true)}
           aria-label="Otvoriť obrázok"
-          className="relative block aspect-square w-full max-w-[520px] cursor-zoom-in overflow-hidden bg-white"
+          className="relative block aspect-square w-full max-w-full cursor-zoom-in overflow-hidden bg-white"
         >
           <Image
             key={`main-${activeIndex}`}
@@ -67,7 +67,7 @@ export default function ProductGallery({
         </button>
 
         {thumbs.length > 1 && (
-          <div className="mt-4 flex max-w-[520px] gap-3 overflow-x-auto no-scrollbar">
+          <div className="mt-4 flex max-w-full gap-3 overflow-x-auto no-scrollbar">
             {thumbs.map((image, index) => {
               const isActive = activeIndex === index;
               return (

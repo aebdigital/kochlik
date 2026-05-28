@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -62,12 +64,12 @@ export default function Footer() {
           <h3 className="mb-6 text-[22px] font-extrabold text-white">Kategórie</h3>
           <ul className="space-y-3 text-[16px] font-light">
             {[
-              ['Nábytok', '/product-category/nabytok'],
-              ['Moderné kvetináče', '/product-category/moderne-kvetinace'],
-              ['Dizajnové kvetináče', '/product-category/dizajnove'],
-              ['Klasické kvetináče', '/product-category/klasicke-kvetinace'],
-              ['Svietiace kvetináče', '/product-category/svietiace-kvetinace'],
-              ['Doplnky', '/product-category/doplnky'],
+              ['Dizajnové kvetináče', '/produkt-kategoria/dizajnove'],
+              ['Moderné kvetináče', '/produkt-kategoria/moderne-kvetinace'],
+              ['Klasické kvetináče', '/produkt-kategoria/klasicke-kvetinace'],
+              ['Svietiace kvetináče', '/produkt-kategoria/svietiace-kvetinace'],
+              ['Nábytok', '/produkt-kategoria/nabytok'],
+              ['Doplnky', '/produkt-kategoria/doplnky'],
             ].map(([label, href]) => (
               <li key={label}>
                 <Link href={href} className="hover:text-[var(--color-brand)] transition-colors">
@@ -91,6 +93,15 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
+                className="hover:text-[var(--color-brand)] transition-colors text-left"
+              >
+                Cookies
+              </button>
+            </li>
           </ul>
         </div>
       </div>

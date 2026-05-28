@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, Menu, X, Phone, Mail, MapPin, Loader2 } from 'lucide-react';
+import { Search, Menu, X, Phone, Mail, MapPin, Loader2, Folder } from 'lucide-react';
+import { useProject } from '@/components/ProjectContext';
+import ProjectDrawer from '@/components/ProjectDrawer';
 
 interface SearchProduct {
   name: string;
@@ -23,11 +25,16 @@ export default function Header() {
   const [hasFetched, setHasFetched] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const lastScrollYRef = useRef(0);
+  const topBarVisibleRef = useRef(true);
+  const scrollSettleUntilRef = useRef(0);
+  const touchYRef = useRef<number | null>(null);
+  const { setIsOpen, itemCount } = useProject();
 
   const navLinks = [
     ['Pre koho', '/pre-koho'],
     ['O nás', '/o-nas'],
-    ['Referencie', '/referencie'],
     ['Blog', '/blog'],
     ['FAQ', '/faq'],
     ['Kontakt', '/kontakt'],
@@ -69,6 +76,91 @@ export default function Header() {
       return () => clearTimeout(timer);
     }
   }, [isSearchOpen]);
+
+  useEffect(() => {
+    const updateStickyOffset = (visible: boolean) => {
+      document.documentElement.style.setProperty('--kochlik-sticky-offset', visible ? '7rem' : '5rem');
+      headerRef.current?.setAttribute('data-topbar-visible', visible ? 'true' : 'false');
+    };
+
+    const setTopBarVisibility = (visible: boolean, settle = true) => {
+      if (topBarVisibleRef.current === visible) {
+        return;
+      }
+
+      topBarVisibleRef.current = visible;
+      updateStickyOffset(visible);
+
+      if (settle) {
+        scrollSettleUntilRef.current = performance.now() + 360;
+      }
+    };
+
+    updateStickyOffset(true);
+    lastScrollYRef.current = window.scrollY;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const lastY = lastScrollYRef.current;
+
+      if (currentY < 12) {
+        lastScrollYRef.current = currentY;
+        setTopBarVisibility(true, false);
+        return;
+      }
+
+      if (performance.now() < scrollSettleUntilRef.current) {
+        lastScrollYRef.current = currentY;
+        return;
+      }
+
+      if (Math.abs(currentY - lastY) < 8) {
+        return;
+      }
+
+      const nextVisible = currentY < lastY;
+      lastScrollYRef.current = currentY;
+      setTopBarVisibility(nextVisible);
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaY) < 4) {
+        return;
+      }
+
+      lastScrollYRef.current = window.scrollY;
+      setTopBarVisibility(event.deltaY < 0);
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      touchYRef.current = event.touches[0]?.clientY ?? null;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const previousY = touchYRef.current;
+      const currentY = event.touches[0]?.clientY ?? null;
+
+      if (previousY === null || currentY === null || Math.abs(currentY - previousY) < 8) {
+        return;
+      }
+
+      lastScrollYRef.current = window.scrollY;
+      setTopBarVisibility(currentY > previousY);
+      touchYRef.current = currentY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      document.documentElement.style.removeProperty('--kochlik-sticky-offset');
+    };
+  }, []);
 
   // Lock body scroll when search is active
   useEffect(() => {
@@ -130,10 +222,14 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]">
+    <header
+      ref={headerRef}
+      data-topbar-visible="true"
+      className="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]"
+    >
       {/* Top bar info (desktop only) */}
-      <div className="hidden border-b border-[#eee] bg-[#ebe9e9] text-[13px] text-[#555] md:block">
-        <div className="site-container flex h-9 items-center justify-between">
+      <div className="kochlik-topbar hidden max-h-8 overflow-hidden border-b border-[#eee] bg-[#ebe9e9] text-[13px] text-[#555] opacity-100 transition-[max-height,opacity,transform,border-width] duration-300 ease-out md:block">
+        <div className="site-container flex h-8 items-center justify-between">
           <div className="flex items-center gap-4">
             <a href="tel:+421905587986" className="inline-flex items-center gap-1 hover:text-[var(--color-brand)]">
               <Phone className="h-3.5 w-3.5" />
@@ -157,7 +253,7 @@ export default function Header() {
       </div>
 
       {/* Main navigation container */}
-      <div className="site-container flex h-24 items-center justify-between relative">
+      <div className="site-container flex h-20 items-center justify-between relative">
         <Link href="/" className="z-50 block shrink-0" aria-label="KOCHLIK domov">
           <Image
             src="/legacy/logo.svg"
@@ -165,16 +261,16 @@ export default function Header() {
             width={236}
             height={56}
             priority
-            className="h-[42px] w-auto md:h-[48px]"
+            className="h-[34px] w-auto md:h-[38px]"
           />
         </Link>
 
-        <nav className="hidden items-center gap-12 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map(([label, href]) => (
             <Link
               key={label}
               href={href}
-              className="text-[20px] font-light text-[#5f5f5f] transition-colors hover:text-[var(--color-brand)]"
+              className="text-[17px] font-light text-[#5f5f5f] transition-colors hover:text-[var(--color-brand)]"
             >
               {label}
             </Link>
@@ -184,7 +280,19 @@ export default function Header() {
             onClick={openSearch}
             className="text-[#282828] transition-colors hover:text-[var(--color-brand)] cursor-pointer"
           >
-            <Search className="h-7 w-7" strokeWidth={1.8} />
+            <Search className="h-5 w-5" strokeWidth={1.8} />
+          </button>
+          <button
+            aria-label="Projektová zložka"
+            onClick={() => setIsOpen(true)}
+            className="text-[#282828] transition-colors hover:text-[var(--color-brand)] cursor-pointer relative"
+          >
+            <Folder className="h-5 w-5" strokeWidth={1.8} />
+            {itemCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-brand)] text-white text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
+                {itemCount}
+              </span>
+            )}
           </button>
         </nav>
 
@@ -195,6 +303,18 @@ export default function Header() {
             className="text-[#282828] hover:text-[var(--color-brand)] cursor-pointer"
           >
             <Search className="h-6 w-6" />
+          </button>
+          <button
+            aria-label="Projektová zložka"
+            onClick={() => setIsOpen(true)}
+            className="text-[#282828] hover:text-[var(--color-brand)] cursor-pointer relative animate-fade-in"
+          >
+            <Folder className="h-6 w-6" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-brand)] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center border border-white">
+                {itemCount}
+              </span>
+            )}
           </button>
           <button
             aria-label="Menu"
@@ -230,7 +350,7 @@ export default function Header() {
           {/* Backdrop overlay - dark blur all around */}
           <div
             onClick={closeSearch}
-            className="fixed inset-0 bg-[#070708]/30 backdrop-blur-xl z-[60] animate-fade-in"
+            className="fixed inset-0 bg-[#070708]/35 backdrop-blur-md z-[60] animate-fade-in"
           />
 
           {/* Modal Container */}
@@ -310,28 +430,28 @@ export default function Header() {
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           <Link
-                            href="/product-category/dizajnove"
+                            href="/produkt-kategoria/dizajnove"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
                             Dizajnové
                           </Link>
                           <Link
-                            href="/product-category/moderne-kvetinace"
+                            href="/produkt-kategoria/moderne-kvetinace"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
                             Moderné
                           </Link>
                           <Link
-                            href="/product-category/svietiace-kvetinace"
+                            href="/produkt-kategoria/svietiace-kvetinace"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
                             Svietiace
                           </Link>
                           <Link
-                            href="/product-category/nabytok"
+                            href="/produkt-kategoria/nabytok"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
@@ -403,28 +523,28 @@ export default function Header() {
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           <Link
-                            href="/product-category/dizajnove"
+                            href="/produkt-kategoria/dizajnove"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
                             Dizajnové kvetináče
                           </Link>
                           <Link
-                            href="/product-category/moderne-kvetinace"
+                            href="/produkt-kategoria/moderne-kvetinace"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
                             Moderné kvetináče
                           </Link>
                           <Link
-                            href="/product-category/svietiace-kvetinace"
+                            href="/produkt-kategoria/svietiace-kvetinace"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
                             Svietiace kvetináče
                           </Link>
                           <Link
-                            href="/product-category/nabytok"
+                            href="/produkt-kategoria/nabytok"
                             onClick={closeSearch}
                             className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
                           >
@@ -448,8 +568,7 @@ export default function Header() {
           </div>
         </>
       )}
+      <ProjectDrawer />
     </header>
   );
 }
-
-

@@ -66,39 +66,18 @@ export default async function BlogPostPage({
       />
 
       <main className="flex-1 bg-white">
-        <article className="site-container max-w-[1100px] py-20">
-          <nav className="mb-10 text-[15px] font-light text-[#999]" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-[var(--color-brand)]">Domov</Link>
-            <span className="mx-2">/</span>
-            <Link href="/blog" className="hover:text-[var(--color-brand)]">Blog</Link>
-            <span className="mx-2">/</span>
-            <span>{post.title}</span>
-          </nav>
+        <article className="mx-auto w-full max-w-[85vw] lg:max-w-[50vw] px-4 sm:px-6 py-20">
+          <h1 className="mb-6 max-w-[900px] text-[36px] font-extrabold leading-[1.15] text-[var(--color-brown)] md:text-[48px]">
+            {post.title}
+          </h1>
 
-          <div className="mb-6 flex items-center gap-5 text-[15px] font-light text-[#aaa]">
+          <div className="mb-10 flex items-center gap-5 text-[15px] font-light text-[#aaa]">
             <span className="h-px w-10 bg-[#dedede]" />
             <span>{post.dateLabel}</span>
           </div>
 
-          <h1 className="mb-10 max-w-[900px] text-[36px] font-extrabold leading-[1.15] text-[var(--color-brown)] md:text-[48px]">
-            {post.title}
-          </h1>
-
-          {post.featuredImage && (
-            <div className="relative mb-14 h-[360px] w-full overflow-hidden bg-[#f4f4f4] md:h-[520px]">
-              <Image
-                src={post.featuredImage}
-                alt={post.title}
-                fill
-                priority
-                sizes="(min-width: 1100px) 1100px, 100vw"
-                className="object-cover"
-              />
-            </div>
-          )}
-
           <div
-            className="blog-content text-[19px] font-light leading-[1.85] text-[#555]"
+            className="blog-content text-[18px] font-light leading-[1.55]"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
         </article>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { createSiteJsonLd, siteConfig } from "@/lib/seo";
+import { ProjectProvider } from "@/components/ProjectContext";
+import CookieConsent from "@/components/CookieConsent";
+import ScrollMotion from "@/components/ScrollMotion";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -87,7 +90,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
-        {children}
+        <ScrollMotion />
+        <ProjectProvider>
+          {children}
+        </ProjectProvider>
+        <CookieConsent />
       </body>
     </html>
   );

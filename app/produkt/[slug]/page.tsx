@@ -96,7 +96,7 @@ export default async function ProductPage({
   const breadcrumbJsonLd = createBreadcrumbJsonLd([
     { name: 'Domov', path: '/' },
     ...(product.categories[0]
-      ? [{ name: product.categories[0], path: `/product-category/${primaryCategorySlug}` }]
+      ? [{ name: product.categories[0], path: `/produkt-kategoria/${primaryCategorySlug}` }]
       : []),
     { name: product.name, path: `/produkt/${product.slug}` },
   ]);
@@ -122,7 +122,7 @@ export default async function ProductPage({
               <span className="mx-2">/</span>
               {product.categories[0] && (
                 <>
-                  <Link href={`/product-category/${primaryCategorySlug}`} className="hover:text-[var(--color-brand)]">
+                  <Link href={`/produkt-kategoria/${primaryCategorySlug}`} className="hover:text-[var(--color-brand)]">
                     {product.categories[0]}
                   </Link>
                   <span className="mx-2">/</span>
@@ -131,7 +131,7 @@ export default async function ProductPage({
               <span>{product.name}</span>
             </nav>
 
-            <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
               <ProductGallery images={galleryImages} alt={product.name} />
 
               <div className="pt-1">
@@ -140,7 +140,7 @@ export default async function ProductPage({
                 </h1>
 
                 {product.description && (
-                  <div className="mb-8 max-w-[780px] whitespace-pre-line text-[17px] font-light leading-[1.75] text-[#666]">
+                  <div className="mb-8 max-w-[780px] whitespace-pre-line text-[18px] font-light leading-[1.5]">
                     {renderDescription(product.description)}
                   </div>
                 )}
@@ -161,7 +161,7 @@ export default async function ProductPage({
                     <h2 className="mb-8 text-[22px] font-extrabold uppercase tracking-wider text-[var(--color-brown)]">
                       Popis produktu
                     </h2>
-                    <div className="whitespace-pre-line text-[16px] font-light leading-[1.8] text-[#555]">
+                    <div className="whitespace-pre-line text-[18px] font-light leading-[1.5]">
                       {renderDescription(product.shortDescription)}
                     </div>
                   </div>
@@ -179,10 +179,10 @@ export default async function ProductPage({
                           href={file.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex min-h-16 items-center justify-between border border-[#d9d9d9] bg-white px-5 py-4 text-[15px] font-semibold text-[#444] transition-all hover:border-[var(--color-brand)] hover:text-[var(--color-brand)] rounded-2xl shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:shadow-md"
+                          className="flex min-h-16 items-center justify-between border border-[#d9d9d9] bg-white px-5 py-4 text-[15px] font-semibold text-[#444] transition-all hover:border-[var(--color-brand)] hover:text-[var(--color-brand)]"
                         >
                           <div className="flex items-center gap-3">
-                            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600 font-extrabold text-[12px]">
+                            <span className="flex h-10 w-10 items-center justify-center bg-red-50 text-red-600 font-extrabold text-[12px]">
                               PDF
                             </span>
                             <span className="font-light text-[#555]">{file.label || 'Technický dokument'}</span>

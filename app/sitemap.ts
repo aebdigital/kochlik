@@ -7,7 +7,6 @@ const staticPages = [
   { path: '/', priority: 1 },
   { path: '/pre-koho', priority: 0.7 },
   { path: '/o-nas', priority: 0.7 },
-  { path: '/referencie', priority: 0.7 },
   { path: '/blog', priority: 0.7 },
   { path: '/faq', priority: 0.5 },
   { path: '/kontakt', priority: 0.8 },
@@ -27,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const categoryEntries = categorySlugs.map(slug => ({
-    url: absoluteUrl(`/product-category/${slug}`),
+    url: absoluteUrl(`/produkt-kategoria/${slug}`),
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: slug === 'vsetky' ? 0.9 : 0.8,

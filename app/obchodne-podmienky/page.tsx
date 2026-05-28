@@ -17,7 +17,7 @@ export default function TermsPage() {
       <CategoryBar />
 
       <main className="flex-1 bg-white">
-        <section className="site-container max-w-[1100px] py-24">
+        <section className="mx-auto w-full max-w-[85vw] px-4 py-24 sm:px-6 lg:max-w-[1150px]">
           <h1 className="mb-10 text-[42px] font-extrabold uppercase leading-tight text-[var(--color-brown)]">
             Všeobecné obchodné podmienky a reklamačný poriadok
           </h1>

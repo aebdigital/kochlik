@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CategoryBar from '@/components/CategoryBar';
+import FaqAccordion from '@/components/FaqAccordion';
 import { createFaqJsonLd, createMetadata } from '@/lib/seo';
 
 const questions = [
@@ -46,24 +47,11 @@ export default function FaqPage() {
       />
 
       <main className="flex-1 bg-white">
-        <section className="site-container py-24">
+        <section className="mx-auto w-full max-w-[85vw] px-4 py-24 sm:px-6 lg:max-w-[1150px]">
           <h1 className="mb-8 text-center text-[30px] font-extrabold text-[var(--color-brand)]">
             Doprava
           </h1>
-          <div className="space-y-0">
-            {questions.map((item, index) => (
-              <details key={item.question} open={index === 0} className="group border-b border-[#e5e5e5] py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-8 text-[24px] font-light text-[#555] marker:hidden">
-                  <span>{item.question}</span>
-                  <span className="text-[30px] leading-none text-[var(--color-brown)] group-open:hidden">+</span>
-                  <span className="hidden text-[30px] leading-none text-[var(--color-brown)] group-open:block">−</span>
-                </summary>
-                <p className="mt-5 max-w-[1560px] text-[21px] font-light leading-relaxed text-[#777]">
-                  {item.answer}
-                </p>
-              </details>
-            ))}
-          </div>
+          <FaqAccordion questions={questions} />
         </section>
       </main>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { type CSSProperties, useMemo, useState } from 'react';
 import ProductCard from '@/components/ProductCard';
 import type { Product } from '@/lib/data';
 
@@ -14,6 +14,12 @@ const sortOptions: Array<{ label: string; value: SortKey }> = [
 ];
 
 const dimensionGroupOptions = ['Do 50 cm', '51-100 cm', '101-150 cm', 'Nad 150 cm'];
+
+function motionDelay(index: number): CSSProperties {
+  return {
+    '--motion-delay': `${Math.min((index % 10) * 45, 405)}ms`,
+  } as CSSProperties;
+}
 
 // Color family config: label -> display color for the circle swatch
 const colorFamilySwatches: Record<string, string> = {
@@ -173,8 +179,8 @@ export default function ProductListing({
   }
 
   return (
-    <div className="grid gap-12 lg:grid-cols-[260px_1fr]">
-      <aside className="hidden pt-8 lg:block">
+    <div className="grid gap-12 lg:grid-cols-[260px_1fr]" data-motion="fade-up">
+      <aside className="hidden pt-8 lg:block" data-motion="fade-up">
         {/* Price Range Filter (Desktop) */}
         {priceRange.max > priceRange.min && (
           <div className="mb-8">
@@ -322,16 +328,16 @@ export default function ProductListing({
         )}
       </aside>
 
-      <div>
+      <div data-motion="fade-up">
         {(heading || description) && (
-          <div className="mb-8 max-w-[920px]">
+          <div className="mb-8 max-w-[920px]" data-motion="fade-up">
             {heading && (
               <h1 className="mb-4 text-[34px] font-extrabold leading-tight text-[#333] md:text-[42px]">
                 {heading}
               </h1>
             )}
             {description && (
-              <p className="text-[18px] font-light leading-relaxed text-[#999] md:text-[20px]">
+              <p className="text-[18px] font-light leading-relaxed text-[#999]">
                 {description}
               </p>
             )}
@@ -339,7 +345,7 @@ export default function ProductListing({
         )}
 
         {/* Desktop sorting header */}
-        <div className="mb-8 hidden items-center justify-between border-b border-[#eee] pb-5 lg:flex">
+        <div className="mb-8 hidden items-center justify-between border-b border-[#eee] pb-5 lg:flex" data-motion="fade-up">
           <span className="text-[16px] font-light text-[#777]">
             Nájdených {visibleProducts.length} produktov
           </span>
@@ -360,7 +366,7 @@ export default function ProductListing({
         </div>
 
         {/* Mobile controls */}
-        <div className="mb-8 grid gap-4 border-b border-[#eee] pb-4 lg:hidden">
+        <div className="mb-8 grid gap-4 border-b border-[#eee] pb-4 lg:hidden" data-motion="fade-up">
           <span className="text-[16px] font-light text-[#777]">{visibleProducts.length} produktov</span>
           
           <select
@@ -465,9 +471,11 @@ export default function ProductListing({
         </div>
 
         {visibleProducts.length > 0 ? (
-          <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
-            {visibleProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
+          <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5" data-motion="fade-up">
+            {visibleProducts.map((product, index) => (
+              <div key={product.id} data-motion="fade-up" style={motionDelay(index)}>
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         ) : (

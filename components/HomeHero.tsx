@@ -16,19 +16,19 @@ const slides: Slide[] = [
     title: 'Dizajnové kvetináče',
     text: 'Vášmu domovu, záhrade alebo firme dodajú osobitný charakter a ich nezvyčajné tvary pôsobia výnimočne a v každom návštevníkovi zanechajú silný dojem.',
     image: '/legacy/pot1.jpg',
-    href: '/product-category/dizajnove',
+    href: '/produkt-kategoria/dizajnove',
   },
   {
     title: 'Moderné kvetináče',
     text: 'Vášmu domovu, záhrade alebo firme dodajú osobitný charakter a ich nezvyčajné tvary pôsobia výnimočne a v každom návštevníkovi zanechajú silný dojem.',
     image: '/legacy/pot22.jpg',
-    href: '/product-category/moderne-kvetinace',
+    href: '/produkt-kategoria/moderne-kvetinace',
   },
   {
     title: 'Klasické kvetináče',
     text: 'Vášmu domovu, záhrade alebo firme dodajú osobitný charakter a ich nezvyčajné tvary pôsobia výnimočne a v každom návštevníkovi zanechajú silný dojem.',
     image: '/legacy/pot32.jpg',
-    href: '/product-category/klasicke-kvetinace',
+    href: '/produkt-kategoria/klasicke-kvetinace',
   },
 ];
 
@@ -89,7 +89,7 @@ export default function HomeHero() {
                 <h1 className="mb-8 text-[46px] font-extrabold uppercase leading-[1.08] tracking-normal md:text-[76px] lg:text-[86px]">
                   {slide.title}
                 </h1>
-                <p className="mb-12 max-w-[620px] text-[18px] font-light leading-relaxed text-white/85 md:text-[22px]">
+                <p className="mb-12 max-w-[620px] text-[18px] font-light leading-relaxed text-white/85">
                   {slide.text}
                 </p>
                 <Link
@@ -116,8 +116,8 @@ export default function HomeHero() {
               aria-current={isActive}
               className={
                 isActive
-                  ? 'h-4 w-4 rounded-full border-2 border-[var(--color-brand)] bg-transparent transition-all'
-                  : 'h-2.5 w-2.5 rounded-full bg-white/80 transition-all hover:bg-white'
+                  ? 'h-4 w-4 cursor-pointer rounded-full border-2 border-[var(--color-brand)] bg-transparent transition-all'
+                  : 'h-2.5 w-2.5 cursor-pointer rounded-full bg-white/80 transition-all hover:bg-white'
               }
             />
           );

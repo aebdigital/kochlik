@@ -54,7 +54,7 @@ export default async function HomePage() {
             <h2 className="mb-4 text-[34px] font-extrabold uppercase leading-tight text-[var(--color-brown)] md:text-[42px]">
               Výhody kvetináčov
             </h2>
-            <p className="mx-auto max-w-[660px] text-[24px] font-light leading-relaxed text-[#666]">
+            <p className="mx-auto max-w-[660px] text-[18px] font-light leading-relaxed text-[#666]">
               Za nezvyčajnými vlastnosťami kvetináčov sa ukrýva PE živica, z ktorej sú vyrobené.
             </p>
 
@@ -65,7 +65,7 @@ export default async function HomePage() {
                   <h3 className="mb-3 text-[20px] font-extrabold uppercase text-[var(--color-brown)]">
                     {benefit.title}
                   </h3>
-                  <p className="text-[16px] font-light leading-relaxed text-[#666]">{benefit.text}</p>
+                  <p className="text-[18px] font-light leading-relaxed text-[#666]">{benefit.text}</p>
                 </div>
               ))}
             </div>
@@ -83,10 +83,10 @@ export default async function HomePage() {
             />
           </div>
           <div className="max-w-[760px]">
-            <h2 className="mb-6 text-[36px] font-extrabold uppercase leading-tight text-[var(--color-brown)] md:text-[44px]">
+            <h2 className="mb-6 text-[34px] font-extrabold uppercase leading-tight text-[var(--color-brown)] md:text-[42px]">
               Pre koho sú určené?
             </h2>
-            <p className="mb-12 text-[24px] font-light leading-relaxed text-[#666]">
+            <p className="mb-12 text-[18px] font-light leading-relaxed text-[#666]">
               Vďaka kombinácii tvarov a jedinečných interpretácií sú kvetináče a doplnky určené hlavne pre architektov a developerov, ale samozrejme dokáže si vybrať každý.
             </p>
             <div className="space-y-8">
@@ -94,7 +94,7 @@ export default async function HomePage() {
                 <h3 className="mb-3 text-[24px] font-extrabold uppercase text-[var(--color-brown)]">
                   Architekti a developeri
                 </h3>
-                <p className="text-[20px] font-light leading-relaxed text-[#666]">
+                <p className="text-[18px] font-light leading-relaxed text-[#666]">
                   Široký sortiment štýlových a dizajnových kvetináčov aj od známych dizajnérov.
                 </p>
               </div>
@@ -102,7 +102,7 @@ export default async function HomePage() {
                 <h3 className="mb-3 text-[24px] font-extrabold uppercase text-[var(--color-brown)]">
                   Koncoví zákazníci
                 </h3>
-                <p className="text-[20px] font-light leading-relaxed text-[#666]">
+                <p className="text-[18px] font-light leading-relaxed text-[#666]">
                   Každý, kto má balkón, terasu, záhradu, byt či dom, si u nás nájde kvetináče či iné produkty.
                 </p>
               </div>
@@ -118,16 +118,16 @@ export default async function HomePage() {
 
         <section className="site-container grid gap-16 py-20 lg:grid-cols-[1fr_0.98fr] lg:items-center">
           <div className="max-w-[760px]">
-            <h2 className="mb-6 text-[40px] font-extrabold uppercase leading-tight text-[var(--color-brown)]">
+            <h2 className="mb-6 text-[34px] font-extrabold uppercase leading-tight text-[var(--color-brown)] md:text-[42px]">
               O nás
             </h2>
-            <p className="mb-12 text-[25px] font-light leading-relaxed text-[#666]">
+            <p className="mb-12 text-[18px] font-light leading-relaxed text-[#666]">
               Sme predajňa kvalitných, ľahkých a odolných kvetináčov od talianskych dizajnérov určených do exteriéru aj interiéru. Okrem dizajnových kvetináčov ponúkame aj kvalitný taliansky nábytok a rôzne produkty pre obchodné centrá, hotely, kúpaliská a wellness zariadenia.
             </p>
             <h3 className="mb-4 text-[24px] font-extrabold uppercase text-[var(--color-brown)]">
               Kamenná predajňa
             </h3>
-            <p className="mb-10 text-[20px] font-light leading-relaxed text-[#666]">
+            <p className="mb-10 text-[18px] font-light leading-relaxed text-[#666]">
               Navštívte našu dizajnovú predajňu v centre Bratislavy, kde si môžete pozrieť vystavené vzorky a katalógy.
             </p>
             <Link
@@ -152,12 +152,12 @@ export default async function HomePage() {
           <section className="site-container py-20">
             <div className="mb-10 flex items-end justify-between gap-6">
               <div>
-                <h2 className="text-[34px] font-extrabold uppercase leading-tight text-[var(--color-brown)]">
+                <h2 className="text-[34px] font-extrabold uppercase leading-tight text-[var(--color-brown)] md:text-[42px]">
                   Dizajnové produkty
                 </h2>
-                <p className="mt-3 text-[20px] font-light text-[#666]">Výber z aktuálneho katalógu.</p>
+                <p className="mt-3 text-[18px] font-light text-[#666]">Výber z aktuálneho katalógu.</p>
               </div>
-              <Link href="/product-category/dizajnove" className="hidden text-[16px] font-extrabold uppercase text-[var(--color-brand)] md:block">
+              <Link href="/produkt-kategoria/dizajnove" className="hidden text-[16px] font-extrabold uppercase text-[var(--color-brand)] md:block">
                 Zobraziť všetko
               </Link>
             </div>

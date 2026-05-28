@@ -19,7 +19,7 @@ export default function PreKohoPage() {
       <CategoryBar />
 
       <main className="flex-1 bg-white">
-        <section className="site-container py-20">
+        <section className="mx-auto w-full max-w-[85vw] px-4 py-20 sm:px-6 lg:max-w-[1150px]">
           <h1 className="mx-auto mb-14 max-w-[1220px] text-[36px] font-extrabold leading-tight text-[var(--color-brown)] md:text-[44px]">
             Vďaka kombinácia tvarov a jedinečných interpretácií, sú fabriky schopné transformovať čisto funkčný objekt na ohromujúci kus nábytku.
           </h1>
@@ -34,17 +34,17 @@ export default function PreKohoPage() {
           </div>
         </section>
 
-        <section className="site-container space-y-16 pb-20">
+        <section className="mx-auto w-full max-w-[85vw] space-y-16 px-4 pb-20 sm:px-6 lg:max-w-[1150px]">
           <div className="grid gap-10 md:grid-cols-[0.32fr_1fr]">
             <h2 className="text-[26px] font-extrabold text-[var(--color-brown)]">Architekti a developeri</h2>
-            <p className="text-[22px] font-light leading-relaxed text-[#777]">
+            <p className="text-[18px] font-light leading-relaxed text-[#777]">
               Široký sortiment štýlových a dizajnových kvetináčov aj od známych dizajnérov. Nakoľko fabriky vyrábajúce kvetináče majú v programe aj výrobu nábytku a iných zaujímavých produktov, ponúkame ich celý sortiment. Pre týchto záujemcov máme veľkoobchodné ceny.
             </p>
           </div>
 
           <div className="grid gap-10 md:grid-cols-[0.32fr_1fr]">
             <h2 className="text-[26px] font-extrabold text-[var(--color-brown)]">Koncoví zákazníci</h2>
-            <p className="text-[22px] font-light leading-relaxed text-[#777]">
+            <p className="text-[18px] font-light leading-relaxed text-[#777]">
               Každý, kto má balkón, terasu, záhradu, byt či dom, si u nás nájde kvetináče či iné produkty, ktoré sa mu dizajnovo hodia do interiéru a exteriéru. Poradíme s farbou, veľkosťou, čo vysádzať, ako vysádzať, po prípade dodáme aj záhradníka.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function PreKohoPage() {
 
           <div className="grid gap-10 md:grid-cols-[0.32fr_1fr]">
             <h2 className="text-[26px] font-extrabold text-[var(--color-brown)]">Katalógy</h2>
-            <p className="text-[22px] font-light leading-relaxed text-[#777]">
+            <p className="text-[18px] font-light leading-relaxed text-[#777]">
               V predajni nájdete katalógy dodávateľov a radi vám pomôžeme vybrať vhodné riešenie podľa priestoru, farby, rozmeru aj spôsobu používania.
             </p>
           </div>

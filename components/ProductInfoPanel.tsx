@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Product } from '@/lib/data';
-import ContactDrawer from './ContactDrawer';
+import { Minus, Plus } from 'lucide-react';
+import { useProject } from './ProjectContext';
 
 
 interface ProductInfoPanelProps {
@@ -13,6 +14,8 @@ interface ProductInfoPanelProps {
 export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
   const [selectedDimension, setSelectedDimension] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
+  const [quantity, setQuantity] = useState(1);
+  const { addItem, setIsOpen } = useProject();
 
   // Handle dimensions
   const hasPriceVariations = product.variations && product.variations.length > 0;
@@ -37,6 +40,25 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
   const hasColors = product.colors && product.colors.length > 0;
   const isLightingProduct = product.categories.includes("Svietiace kvetináče") || 
     product.colors.some(c => /light|led|rgb|cable|battery|rechargeable/i.test(c.name));
+
+  const handleAddToProject = () => {
+    const selectedColorObj = product.colors?.find(c => c.name === selectedColor) || null;
+    const itemImage = selectedColorObj?.image || product.images?.[0] || '';
+
+    addItem({
+      productId: product.id,
+      slug: product.slug,
+      name: product.name,
+      image: itemImage,
+      color: selectedColorObj,
+      dimension: selectedDimension || null,
+      quantity: quantity,
+      price: currentPrice,
+      url: product.url,
+    });
+
+    setIsOpen(true);
+  };
 
   return (
     <div>
@@ -133,13 +155,38 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
       )}
 
       {/* Action Purchase Form Drawer */}
-      <div className="mb-10">
-        <ContactDrawer 
-          productName={product.name} 
-          productUrl={product.url}
-          selectedDimension={selectedDimension}
-          selectedColor={selectedColor}
-        />
+      <div className="mb-10 flex flex-col sm:flex-row gap-4">
+        {/* Quantity selector */}
+        <div className="flex items-center border border-[#d9d9d9] h-14 bg-white w-full sm:w-auto shrink-0 justify-between">
+          <button
+            type="button"
+            onClick={() => setQuantity(q => Math.max(1, q - 1))}
+            className="w-12 h-full flex items-center justify-center text-[#555] hover:bg-gray-50 transition-colors cursor-pointer border-r border-[#d9d9d9]"
+            aria-label="Menej"
+          >
+            <Minus className="w-4 h-4" />
+          </button>
+          <span className="w-12 text-center text-[16px] font-light text-[#333] select-none">
+            {quantity}
+          </span>
+          <button
+            type="button"
+            onClick={() => setQuantity(q => q + 1)}
+            className="w-12 h-full flex items-center justify-center text-[#555] hover:bg-gray-50 transition-colors cursor-pointer border-l border-[#d9d9d9]"
+            aria-label="Viac"
+          >
+            <Plus className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Add to project button */}
+        <button
+          type="button"
+          onClick={handleAddToProject}
+          className="flex-grow inline-flex h-14 items-center justify-center bg-[var(--color-brand)] px-8 text-[16px] font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[var(--color-brand-dark)] cursor-pointer"
+        >
+          Pridať do projektu
+        </button>
       </div>
     </div>
   );

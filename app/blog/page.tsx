@@ -30,7 +30,7 @@ export default function BlogPage() {
           </div>
 
           {posts.length === 0 ? (
-            <p className="text-[20px] font-light text-[#999]">
+            <p className="text-[18px] font-light text-[#999]">
               Zatiaľ tu nie sú žiadne príspevky.
             </p>
           ) : (
@@ -64,7 +64,7 @@ export default function BlogPage() {
                         {post.title}
                       </h2>
                       {post.excerpt && (
-                        <p className="line-clamp-4 text-[20px] font-light leading-relaxed text-[#666]">
+                        <p className="line-clamp-4 text-[18px] font-light leading-relaxed text-[#666]">
                           {post.excerpt}
                         </p>
                       )}
