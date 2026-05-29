@@ -210,7 +210,7 @@ export default function Header() {
       <span>
         {parts.map((part, i) =>
           regex.test(part) ? (
-            <mark key={i} className="bg-[var(--color-brand)]/35 text-white font-semibold rounded-sm px-0.5">
+            <mark key={i} className="bg-[var(--color-brand)]/20 text-[#282828] font-semibold rounded-sm px-0.5">
               {part}
             </mark>
           ) : (
@@ -285,14 +285,17 @@ export default function Header() {
           <button
             aria-label="Projektová zložka"
             onClick={() => setIsOpen(true)}
-            className="text-[#282828] transition-colors hover:text-[var(--color-brand)] cursor-pointer relative"
+            className="h-11 flex items-center gap-3 px-6 bg-[var(--color-brand)] hover:bg-[var(--color-brand-dark)] text-white font-bold text-[16px] transition-colors cursor-pointer"
           >
-            <Folder className="h-5 w-5" strokeWidth={1.8} />
-            {itemCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-brand)] text-white text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
-                {itemCount}
-              </span>
-            )}
+            <div className="relative inline-block">
+              <Folder className="h-5 w-5 text-white" strokeWidth={1.8} />
+              {itemCount > 0 && (
+                <span className="absolute -bottom-1 -right-1 bg-black text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </div>
+            <span>Môj projekt</span>
           </button>
         </nav>
 
@@ -344,7 +347,7 @@ export default function Header() {
         </div>
       )}
 
-      {/* Centered Liquid Glass Search Modal */}
+      {/* Centered White Search Modal */}
       {isSearchOpen && (
         <>
           {/* Backdrop overlay - dark blur all around */}
@@ -358,44 +361,39 @@ export default function Header() {
             onClick={closeSearch}
             className="fixed inset-0 z-[70] flex items-center justify-center p-4 md:p-6 pointer-events-none"
           >
-            {/* Liquid Glass Modal Card */}
+            {/* White Modal Card */}
             <div
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-3xl max-h-[80vh] md:max-h-[70vh] bg-white/[0.06] border border-white/10 backdrop-blur-3xl shadow-[0_32px_80px_-10px_rgba(0,0,0,0.7)] rounded-3xl flex flex-col text-white relative overflow-hidden pointer-events-auto animate-scale-in"
+              className="w-full max-w-3xl max-h-[80vh] md:max-h-[70vh] bg-white border border-gray-100/90 shadow-[0_32px_80px_-10px_rgba(0,0,0,0.18)] rounded-3xl flex flex-col text-[#282828] relative overflow-hidden pointer-events-auto animate-scale-in"
             >
-              {/* Background glowing liquid spots for glass depth */}
-              <div className="absolute -top-40 -left-40 w-96 h-96 bg-[var(--color-brand)]/15 rounded-full blur-[110px] pointer-events-none" />
-              <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#88b23f]/10 rounded-full blur-[110px] pointer-events-none" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#331f1e]/30 rounded-full blur-[120px] pointer-events-none" />
-
               {/* Close Button */}
               <button
                 onClick={closeSearch}
-                className="absolute right-5 top-5 text-white/50 hover:text-white transition-colors cursor-pointer z-10 p-1 hover:bg-white/5 rounded-full"
+                className="absolute right-5 top-5 text-[#888] hover:text-[#282828] hover:bg-gray-100 transition-all cursor-pointer z-10 p-1.5 rounded-full"
                 aria-label="Zatvoriť vyhľadávanie"
               >
-                <X className="h-6 w-6" strokeWidth={1.8} />
+                <X className="h-5 w-5" strokeWidth={1.8} />
               </button>
 
               {/* Input Area */}
-              <div className="p-6 md:p-8 pb-4 border-b border-white/10 shrink-0">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">
+              <div className="p-6 md:p-8 pb-4 border-b border-gray-100 shrink-0">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
                   Vyhľadávanie
                 </h3>
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-white/40" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
                     ref={inputRef}
                     type="text"
                     placeholder="Vyhľadajte kvetináče, nábytok alebo značky..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full h-12 pl-12 pr-10 bg-white/5 border border-white/10 rounded-2xl text-base md:text-lg font-light text-white placeholder-white/35 focus:outline-none focus:border-[var(--color-brand)] focus:ring-1 focus:ring-[var(--color-brand)] shadow-inner transition-all duration-200"
+                    className="w-full h-12 pl-12 pr-10 bg-[#f9f9f9] border border-gray-200/80 rounded-2xl text-base md:text-lg font-light text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-[var(--color-brand)] focus:ring-1 focus:ring-[var(--color-brand)] shadow-sm transition-all duration-200"
                   />
                   {searchQuery && (
                     <button
                       onClick={() => setSearchQuery('')}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-white/45 hover:text-white transition-colors cursor-pointer"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                       aria-label="Vymazať vyhľadávanie"
                     >
                       <X className="h-4 w-4" />
@@ -408,52 +406,52 @@ export default function Header() {
               <div className="flex-grow overflow-y-auto p-6 md:p-8 pt-4 no-scrollbar">
                 {isLoading ? (
                   // Loading State
-                  <div className="flex flex-col items-center justify-center py-16 gap-3 text-white/40">
+                  <div className="flex flex-col items-center justify-center py-16 gap-3 text-gray-400">
                     <Loader2 className="h-8 w-8 animate-spin text-[var(--color-brand)]" />
-                    <span className="text-sm font-light">Načítavam produkty...</span>
+                    <span className="text-sm font-light text-gray-500">Načítavam produkty...</span>
                   </div>
                 ) : searchQuery.trim() === '' ? (
                   // Empty query - show guidance & quick categories
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                      <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
                         Ako začať
                       </h3>
-                      <p className="text-white/70 font-light text-sm md:text-base mb-6 leading-relaxed">
+                      <p className="text-gray-600 font-light text-sm md:text-base mb-6 leading-relaxed">
                         Zadajte názov kvetináča (napr. <span className="font-normal text-[var(--color-brand)]">etria</span>, <span className="font-normal text-[var(--color-brand)]">kube</span>), značku alebo kategóriu. Vyhľadávanie prebieha okamžite počas písania.
                       </p>
                     </div>
-                    <div className="flex flex-col gap-6 md:border-l md:border-white/10 md:pl-8">
+                    <div className="flex flex-col gap-6 md:border-l md:border-gray-100 md:pl-8">
                       <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
                           Rýchle kategórie
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           <Link
                             href="/produkt-kategoria/dizajnove"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Dizajnové
                           </Link>
                           <Link
                             href="/produkt-kategoria/moderne-kvetinace"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Moderné
                           </Link>
                           <Link
                             href="/produkt-kategoria/svietiace-kvetinace"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Svietiace
                           </Link>
                           <Link
                             href="/produkt-kategoria/nabytok"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Nábytok
                           </Link>
@@ -463,12 +461,12 @@ export default function Header() {
                   </div>
                 ) : filteredProducts.length === 0 ? (
                   // No Results State
-                  <div className="flex flex-col items-center justify-center py-12 text-center text-white/60">
+                  <div className="flex flex-col items-center justify-center py-12 text-center text-gray-500">
                     <span className="text-4xl mb-4">🔍</span>
                     <h3 className="text-base font-normal mb-1">
                       Nenašli sa žiadne produkty
                     </h3>
-                    <p className="text-xs font-light text-white/40">
+                    <p className="text-xs font-light text-gray-400">
                       Pre výraz &quot;{searchQuery}&quot; sme nenašli žiadnu zhodu. Skúste iné kľúčové slovo.
                     </p>
                   </div>
@@ -476,7 +474,7 @@ export default function Header() {
                   // Products Found
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                      <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">
                         Produkty ({filteredProducts.length})
                       </h3>
                       <div className="flex flex-col gap-2 max-h-[340px] overflow-y-auto pr-2 no-scrollbar">
@@ -485,9 +483,9 @@ export default function Header() {
                             key={product.slug}
                             href={`/produkt/${product.slug}`}
                             onClick={closeSearch}
-                            className="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/5 transition-all duration-150"
+                            className="flex items-center gap-4 p-3 rounded-2xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all duration-150"
                           >
-                            <div className="relative h-14 w-14 bg-white/5 rounded-lg overflow-hidden shrink-0 border border-white/10 flex items-center justify-center p-1">
+                            <div className="relative h-14 w-14 bg-gray-50 rounded-lg overflow-hidden shrink-0 border border-gray-100 flex items-center justify-center p-1">
                               <Image
                                 src={product.image}
                                 alt={product.name}
@@ -497,13 +495,13 @@ export default function Header() {
                               />
                             </div>
                             <div className="flex-grow min-w-0">
-                              <div className="text-[11px] uppercase tracking-wider text-white/40 font-medium leading-none mb-1">
+                              <div className="text-[11px] uppercase tracking-wider text-gray-400 font-medium leading-none mb-1">
                                 {product.brand}
                               </div>
-                              <h4 className="text-sm md:text-base font-normal text-white truncate leading-snug hover:text-[var(--color-brand)] transition-colors">
+                              <h4 className="text-sm md:text-base font-normal text-gray-800 truncate leading-snug hover:text-[var(--color-brand)] transition-colors">
                                 {highlightText(product.name, searchQuery)}
                               </h4>
-                              <div className="text-[11px] text-white/40 leading-none mt-1">
+                              <div className="text-[11px] text-gray-400 leading-none mt-1">
                                 {product.category}
                               </div>
                             </div>
@@ -516,47 +514,47 @@ export default function Header() {
                         ))}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-6 md:border-l md:border-white/10 md:pl-8 hidden md:flex">
+                    <div className="flex flex-col gap-6 md:border-l md:border-gray-100 md:pl-8 hidden md:flex">
                       <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
                           Rýchle kategórie
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           <Link
                             href="/produkt-kategoria/dizajnove"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Dizajnové kvetináče
                           </Link>
                           <Link
                             href="/produkt-kategoria/moderne-kvetinace"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Moderné kvetináče
                           </Link>
                           <Link
                             href="/produkt-kategoria/svietiace-kvetinace"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Svietiace kvetináče
                           </Link>
                           <Link
                             href="/produkt-kategoria/nabytok"
                             onClick={closeSearch}
-                            className="px-3 py-1.5 bg-white/5 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-white/70 border border-white/5 transition-colors"
+                            className="px-3 py-1.5 bg-gray-50 hover:bg-[var(--color-brand)] hover:text-white rounded-full text-xs font-light text-gray-600 border border-gray-200/60 transition-colors"
                           >
                             Nábytok
                           </Link>
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
                           Záruka kvality
                         </h3>
-                        <p className="text-xs font-light text-white/50 leading-relaxed">
+                        <p className="text-xs font-light text-gray-500 leading-relaxed">
                           Všetky naše produkty sú dovážané priamo od renomovaných talianskych výrobcov, predovšetkým Euro3plast (Plust Collection).
                         </p>
                       </div>

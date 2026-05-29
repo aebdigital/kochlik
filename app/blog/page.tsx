@@ -22,13 +22,10 @@ export default function BlogPage() {
       <CategoryBar />
 
       <main className="flex-1 bg-white">
-        <section className="site-container py-24">
-          <div className="mb-16 flex gap-5 text-[22px] font-light text-[#bbb]">
-            <span className="text-[var(--color-brand)]">Všetko</span>
-            <span>/</span>
-            <span>Novinky</span>
-          </div>
-
+        <section className="mx-auto w-full max-w-[85vw] px-4 py-24 sm:px-6 lg:max-w-[1150px]">
+          <h1 className="mb-14 text-[36px] font-extrabold leading-tight text-[var(--color-brown)] md:text-[44px]">
+            Prečítajte si inšpiratívne články o dizajne, novinkách a starostlivosti o rastliny.
+          </h1>
           {posts.length === 0 ? (
             <p className="text-[18px] font-light text-[#999]">
               Zatiaľ tu nie sú žiadne príspevky.

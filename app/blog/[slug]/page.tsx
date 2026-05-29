@@ -83,7 +83,7 @@ export default async function BlogPostPage({
         </article>
 
         {related.length > 0 && (
-          <section className="site-container max-w-[1320px] border-t border-[#eee] py-20">
+          <section className="mx-auto w-full max-w-[85vw] px-4 py-20 sm:px-6 lg:max-w-[1150px] border-t border-[#eee]">
             <h2 className="mb-10 text-[28px] font-extrabold uppercase tracking-wide text-[var(--color-brown)]">
               Mohlo by vás zaujímať
             </h2>

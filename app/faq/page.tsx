@@ -48,8 +48,8 @@ export default function FaqPage() {
 
       <main className="flex-1 bg-white">
         <section className="mx-auto w-full max-w-[85vw] px-4 py-24 sm:px-6 lg:max-w-[1150px]">
-          <h1 className="mb-8 text-center text-[30px] font-extrabold text-[var(--color-brand)]">
-            Doprava
+          <h1 className="mb-14 text-[36px] font-extrabold leading-tight text-[var(--color-brown)] md:text-[44px]">
+            Odpovede na najčastejšie otázky o nákupe, objednávkach a doprave.
           </h1>
           <FaqAccordion questions={questions} />
         </section>
